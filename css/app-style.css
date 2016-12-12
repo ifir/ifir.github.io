@@ -9,29 +9,45 @@ body
     color: #222;
     background: #fff;
 }
-body{
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
+body
+{
     min-width: 300px;
     max-width: 640px;
     margin: 0 auto;
     padding: 0;
+
+    -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+}
+.text-center
+{
+    text-align: center;
 }
 .container
 {
-    width: 1200px;
-    margin: 0 auto;
+    width: 100%;
 }
 /* 加载动画 */
 .loading
 {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+
     width: 100%;
     height: 100%;
-    background: #000;
+
+    -webkit-transition: opacity 1s 4s;
+            transition: opacity 1s 4s;
+
     opacity: 1;
-    transition: opacity 1s 4s;
+    background: #000;
 }
-.loaded{
+.loaded
+{
     opacity: 0;
 }
 .loading-wrap
@@ -107,9 +123,103 @@ body{
     -webkit-animation: text 2s infinite alternate;
             animation: text 2s infinite alternate;
     text-align: center;
-
-
 }
+/* 第一页 */
+.section-pageone
+{
+    position: relative;
+
+    overflow: hidden;
+
+    height: 100%;
+    max-height: 100%;
+
+    background: #8ffdff;
+    background: -webkit-linear-gradient(250deg, #8ffdff, #ffec9b);
+    background:         linear-gradient(200deg, #8ffdff, #ffec9b);
+}
+.header,
+.name,
+.job
+{
+    position: absolute;
+}
+.header
+{
+    z-index: 99;
+    top: 25%;
+    left: 0;
+
+    width: 100%;
+}
+.isme
+{
+    width: 30%;
+    padding: 2px;
+
+    -webkit-animation: header 1.5s ease-in-out;
+            animation: header 1.5s ease-in-out;
+
+    border: 1px solid #47c6bc;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00abff;
+}
+.name p,
+.job p
+{
+    margin: 0;
+    padding: 0;
+}
+.name
+{
+    font-size: 20px;
+    line-height: 70px;
+
+    top: 50%;
+    left: 20%;
+
+    width: 70px;
+    height: 70px;
+
+    text-align: center;
+
+    color: #fff;
+    border-radius: 50%;
+    background: #97c4f9;
+}
+.job
+{
+    font-size: 20px;
+    line-height: 90px;
+
+    top: 50%;
+    right: 20%;
+
+    width: 90px;
+    height: 90px;
+
+    text-align: center;
+
+    color: #fff;
+    border-radius: 50%;
+    background: rgba(255, 98, 194, .7);
+}
+.pageone-ani .header
+{
+    -webkit-animation: header 1.5s ease-in-out;
+            animation: header 1.5s ease-in-out;
+}
+.pageone-ani .name
+{
+    -webkit-animation: name 1.6s ease-in-out ;
+            animation: name 1.6s ease-in-out ;
+}
+.pageone-ani .job
+{
+    -webkit-animation: job 1.7s ease-in-out;
+            animation: job 1.7s ease-in-out;
+}
+/* @keyframes */
 @-webkit-keyframes light
 {
     0%
@@ -198,5 +308,127 @@ body{
     100%
     {
         box-shadow: 0 0 60px #fff582;
+    }
+}
+@-webkit-keyframes isme
+{
+    0%
+    {
+        box-shadow: 0 0 10px #00abff;
+    }
+    50%
+    {
+        box-shadow: 0 0 20px #00abff;
+    }
+    100%
+    {
+        box-shadow: 0 0 10px #00abff;
+    }
+}
+@keyframes isme
+{
+    0%
+    {
+        box-shadow: 0 0 10px #00abff;
+    }
+    50%
+    {
+        box-shadow: 0 0 20px #00abff;
+    }
+    100%
+    {
+        box-shadow: 0 0 10px #00abff;
+    }
+}
+
+@-webkit-keyframes header
+{
+    0%
+    {
+        top: 120%;
+    }
+    80%
+    {
+        top: 20%;
+    }
+    100%
+    {
+        top: 25%;
+    }
+}
+
+@keyframes header
+{
+    0%
+    {
+        top: 120%;
+    }
+    80%
+    {
+        top: 20%;
+    }
+    100%
+    {
+        top: 25%;
+    }
+}
+@-webkit-keyframes name
+{
+    0%
+    {
+        top: 120%;
+    }
+    80%
+    {
+        top: 45%;
+    }
+    100%
+    {
+        top: 50%;
+    }
+}
+@keyframes name
+{
+    0%
+    {
+        top: 120%;
+    }
+    80%
+    {
+        top: 45%;
+    }
+    100%
+    {
+        top: 50%;
+    }
+}
+@-webkit-keyframes job
+{
+    0%
+    {
+        top: 120%;
+    }
+    70%
+    {
+        top: 45%;
+    }
+    100%
+    {
+        top: 50%;
+    }
+}
+@keyframes job
+{
+    0%
+    {
+        top: 120%;
+    }
+    70%
+    {
+        top: 45%;
+    }
+    100%
+    {
+        top: 50%;
     }
 }
