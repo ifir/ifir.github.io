@@ -157,9 +157,6 @@ body
     width: 30%;
     padding: 2px;
 
-    -webkit-animation: header 1.5s ease-in-out;
-            animation: header 1.5s ease-in-out;
-
     border: 1px solid #47c6bc;
     border-radius: 50%;
     box-shadow: 0 0 10px #00abff;
@@ -204,6 +201,10 @@ body
     border-radius: 50%;
     background: rgba(255, 98, 194, .7);
 }
+.pageone-ani .isme{
+	-webkit-animation: header 1.5s ease-in-out;
+            animation: header 1.5s ease-in-out;
+}
 .pageone-ani .header
 {
     -webkit-animation: header 1.5s ease-in-out;
@@ -218,6 +219,44 @@ body
 {
     -webkit-animation: job 1.7s ease-in-out;
             animation: job 1.7s ease-in-out;
+}
+
+.next-pagetwo{
+	width: 50px;
+	height: 28px;
+	position: absolute;
+	bottom: 5%;
+	left: 50%;
+	margin-left: -25px;
+	cursor: pointer;
+}
+.next-pagetwo span{
+	display: block;
+	width: 50px;
+	height: 14px;
+	position: relative;
+}
+.next-pagetwo span:before,
+.next-pagetwo span:after{
+	content: '';
+	display: block;
+	width: 15px;
+	height: 3px;
+	background: #6ae2ff;
+	position: absolute;
+	top: 2px;
+}
+.next-pagetwo span:before{
+	left:12px;
+	transform: rotateZ(30deg);
+}
+.next-pagetwo span:after{
+	right: 12px;
+	transform: rotateZ(-30deg);
+}
+.pageone-ani .next-pagetwo{
+	-webkit-animation: nextpagetwo 1s ease-in-out infinite alternate;
+            animation: nextpagetwo 1s ease-in-out infinite alternate;
 }
 /* @keyframes */
 @-webkit-keyframes light
@@ -430,5 +469,27 @@ body
     100%
     {
         top: 50%;
+    }
+}
+@-webkit-keyframes nextpagetwo
+{
+    0%
+    {
+        bottom: 7%;
+    }
+    100%
+    {
+        bottom: 9%;
+    }
+}
+@keyframes nextpagetwo
+{
+    0%
+    {
+        bottom: 7%;
+    }
+    100%
+    {
+        bottom: 9%;
     }
 }
