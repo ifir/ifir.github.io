@@ -10,4 +10,9 @@ function load() {
 		//移除loading节点
 		$loading.remove();
 	},5000);
+	//第一页
+	
+
+
+
 }

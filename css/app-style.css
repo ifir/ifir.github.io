@@ -9,6 +9,14 @@ body
     color: #222;
     background: #fff;
 }
+body{
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+    min-width: 300px;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0;
+}
 .container
 {
     width: 1200px;
