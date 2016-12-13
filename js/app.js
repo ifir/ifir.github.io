@@ -6,18 +6,18 @@ function load() {
 	var $loading = utils.$('.loading')[0];
 	var $pageone = utils.$('.section-pageone')[0];
 	var height = window.innerHeight;
-	var page = 0;
+	var page = 0, translate = 0;
 	var isWheel = false, isComplete = false, wheelTimer = null;
 	utils.addClass($loading, 'loaded');
 	clearTimeout(timer);
 	timer = setTimeout(function(){
 		//移除loading节点
 		$loading.remove();
-		utils.addClass($pageone, 'pageone-ani');
+		utils.addClass($pageone, 'active');
 		clearTimeout(timer);
 		//鼠标滑轮绑定事件
 		window.addEventListener('mousewheel', function(e){
-			if(e.deltaY > 0 && page < 1){
+			if(e.deltaY > 0 && page < 2){
 				nextPage();
 				console.log('向下')
 			}
@@ -25,28 +25,36 @@ function load() {
 				prevPage();
 				console.log('向上')
 			}
-		})
+		});
 	},4001);
 	//第一页
 	utils.$('.next-pagetwo')[0].addEventListener('click', nextPage,false);
 	function nextPage(){
 		page++;
-		utils.$('.container')[0].style.transform = "translateY(" + -height*page + "px)";
-		utils.$('.container')[0].style.webkitTransform = "translateY(" + -height*page + "px)";
+		translate -= height;
+		var $page = utils.$('.page');
+		console.log(page)
+		utils.$('.container')[0].style.transform = "translateY(" + translate + "px)";
+		utils.$('.container')[0].style.webkitTransform = "translateY(" + translate + "px)";
+		for(var i = 0, len = $page.length; i < len; i++){
+			utils.removeClass($page[i], 'active');
+		}
+		utils.addClass($page[page], 'active');
 	}
 	function prevPage(){
 		page--;
-		utils.$('.container')[0].style.transform = "translateY(" + height*page + "px)";
-		utils.$('.container')[0].style.webkitTransform = "translateY(" + height*page + "px)";
+		translate += height;
+		var $page = utils.$('.page');
+		utils.$('.container')[0].style.transform = "translateY(" + translate + "px)";
+		utils.$('.container')[0].style.webkitTransform = "translateY(" + translate + "px)";
+		for(var i = 0, len = $page.length; i < len; i++){
+			utils.removeClass($page[i], 'active');
+		}
+		utils.addClass($page[page], 'active');
 	}
-	var isScroll = false;
-	// window.addEventListener('scroll', function(){
-	// 	var sTop = document.body.scrollTop || document.documentElement.scrollTop;
-	// 	if(sTop > 0){
-	// 		isScroll = true;
+	//第二页
+	// var perList = utils.$('.per-list li');
+	// for(var i = 0, len = perList.length; i < len; i++){
 
-	// 	}
-	// }, false)
-	
-
+	// }
 }

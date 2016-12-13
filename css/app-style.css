@@ -11,15 +11,24 @@ body
 }
 body
 {
+    overflow: hidden;
+
     min-width: 300px;
     max-width: 640px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: hidden;
     min-height: 100%;
     max-height: 100%;
+    margin: 0 auto;
+    padding: 0;
+
     -webkit-overflow-scrolling: touch;
             overflow-scrolling: touch;
+}
+/* iconfont */
+ul
+{
+    padding-left: 0;
+
+    list-style: none;
 }
 .text-center
 {
@@ -30,8 +39,13 @@ body
     width: 100%;
     height: 100%;
     min-height: 100%;
-    transition: transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
-    transform: translateY(0);
+
+    -webkit-transition: -webkit-transform 1s cubic-bezier(.65, .05, .36, 1);
+            transition: -webkit-transform 1s cubic-bezier(.65, .05, .36, 1);
+            transition:         transform 1s cubic-bezier(.65, .05, .36, 1);
+            transition:         transform 1s cubic-bezier(.65, .05, .36, 1), -webkit-transform 1s cubic-bezier(.65, .05, .36, 1);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
 }
 /* 加载动画 */
 .loading
@@ -140,9 +154,9 @@ body
     height: 100%;
     max-height: 100%;
 
-    background: #8ffdff;
-    background: -webkit-linear-gradient(250deg, #8ffdff, #ffec9b);
-    background:         linear-gradient(200deg, #8ffdff, #ffec9b);
+    background: #b9aca5;
+    background: -webkit-linear-gradient(250deg, #b9aca5, #f2fbff);
+    background:         linear-gradient(200deg, #b9aca5, #f2fbff);
 }
 .header,
 .name,
@@ -163,9 +177,9 @@ body
     width: 30%;
     padding: 2px;
 
-    border: 1px solid #47c6bc;
+    border: 1px solid #9da2a2;
     border-radius: 50%;
-    box-shadow: 0 0 10px #00abff;
+    box-shadow: 0 0 10px #6a6964;
 }
 .name p,
 .job p
@@ -188,7 +202,7 @@ body
 
     color: #fff;
     border-radius: 50%;
-    background: #97c4f9;
+    background: #bebebe;
 }
 .job
 {
@@ -205,72 +219,207 @@ body
 
     color: #fff;
     border-radius: 50%;
-    background: rgba(255, 98, 194, .7);
+    background: #afb1be;
 }
-.pageone-ani .isme{
-	-webkit-animation: header 1.5s ease-in-out;
-            animation: header 1.5s ease-in-out;
-}
-.pageone-ani .header
+.active .header
 {
-    -webkit-animation: header 1.5s ease-in-out;
-            animation: header 1.5s ease-in-out;
+    /*-webkit-animation: header 1.5s ease-in-out;
+            animation: header 1.5s ease-in-out;*/
+    -webkit-animation: header 1.5s cubic-bezier(.68, -.55, .27, 1.55);
+            animation: header 1.5s cubic-bezier(.68, -.55, .27, 1.55);
 }
-.pageone-ani .name
+.active .name
 {
-    -webkit-animation: name 1.6s ease-in-out ;
-            animation: name 1.6s ease-in-out ;
+    /*-webkit-animation: name 1.6s ease-in-out ;
+            animation: name 1.6s ease-in-out ;*/
+    -webkit-animation: name 1.6s cubic-bezier(.68, -.55, .27, 1.55);
+            animation: name 1.6s cubic-bezier(.68, -.55, .27, 1.55);
 }
-.pageone-ani .job
+.active .job
 {
-    -webkit-animation: job 1.7s ease-in-out;
-            animation: job 1.7s ease-in-out;
+    /*-webkit-animation: job 1.7s ease-in-out;
+            animation: job 1.7s ease-in-out;*/
+    -webkit-animation: job 1.7s cubic-bezier(.68, -.55, .27, 1.55);
+            animation: job 1.7s cubic-bezier(.68, -.55, .27, 1.55);
 }
 
-.next-pagetwo{
-	width: 50px;
-	height: 28px;
-	position: absolute;
-	bottom: 5%;
-	left: 50%;
-	margin-left: -25px;
-	cursor: pointer;
+.next
+{
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+
+    width: 50px;
+    height: 28px;
+    margin-left: -25px;
+
+    cursor: pointer;
 }
-.next-pagetwo span{
-	display: block;
-	width: 50px;
-	height: 14px;
-	position: relative;
+.next span
+{
+    position: relative;
+
+    display: block;
+
+    width: 50px;
+    height: 14px;
 }
-.next-pagetwo span:before,
-.next-pagetwo span:after{
-	content: '';
-	display: block;
-	width: 15px;
-	height: 3px;
-	background: #6ae2ff;
-	position: absolute;
-	top: 2px;
+.next span:before,
+.next span:after
+{
+    position: absolute;
+    top: 2px;
+
+    display: block;
+
+    width: 15px;
+    height: 3px;
+
+    content: '';
+
+    background: #b9aca5;
 }
-.next-pagetwo span:before{
-	left:12px;
-	transform: rotateZ(30deg);
+.next span:before
+{
+    left: 12px;
+
+    -webkit-transform: rotateZ(30deg);
+            transform: rotateZ(30deg);
 }
-.next-pagetwo span:after{
-	right: 12px;
-	transform: rotateZ(-30deg);
+.next span:after
+{
+    right: 12px;
+
+    -webkit-transform: rotateZ(-30deg);
+            transform: rotateZ(-30deg);
 }
-.pageone-ani .next-pagetwo{
-	-webkit-animation: nextpagetwo 1s ease-in-out infinite alternate;
+.next
+{
+    -webkit-animation: nextpagetwo 1s ease-in-out infinite alternate;
             animation: nextpagetwo 1s ease-in-out infinite alternate;
 }
 /* 第二页 */
-.section-pagetwo{
+.section-pagetwo,
+.section-pagethree
+{
+    position: relative;
+
     width: 100%;
     height: 100%;
     max-height: 100%;
-    background: url('../img/bg.png') 0 0 repeat;
+
+    background: #ececec;
 }
+.page-title
+{
+    font-size: 30px;
+    line-height: 1;
+
+    display: inline-block;
+
+    margin: 10% 0 0 0;
+    padding: 0;
+    padding: 10px;
+
+    vertical-align: middle;
+
+    color: #a19088;
+    border-bottom: 4px solid #a19088;
+}
+.icon
+{
+    display: inline-block;
+
+    width: 30px;
+    height: 30px;
+    margin-top: -4px;
+    margin-right: 5px;
+
+    vertical-align: middle;
+}
+.icon-user
+{
+    background: url('../img/User.png') center center no-repeat;
+    background-size: 30px 30px;
+}
+.icon-skills
+{
+    background: url('../img/Tools.png') center center no-repeat;
+    background-size: 30px 30px;
+}
+.per-list
+{
+    margin-top: 40px;
+}
+.per-list b
+{
+    letter-spacing: 4px;
+}
+.per-list li
+{
+    -webkit-transition: all 1s ease .3s;
+            transition: all 1s ease .3s;
+
+    opacity: .5;
+}
+.per-list li,
+.per-list a
+{
+    font-size: 16px;
+
+    padding: 8px 0;
+
+    color: #a19088;
+}
+.per-list li:nth-child(1)
+{
+    -webkit-transform: translateY(-34px);
+            transform: translateY(-34px);
+}
+.per-list li:nth-child(2)
+{
+    -webkit-transform: translateY(-68px);
+            transform: translateY(-68px);
+}
+.per-list li:nth-child(3)
+{
+    -webkit-transform: translateY(-102px);
+            transform: translateY(-102px);
+}
+.per-list li:nth-child(4)
+{
+    -webkit-transform: translateY(-136px);
+            transform: translateY(-136px);
+}
+.per-list li:nth-child(5)
+{
+    -webkit-transform: translateY(-170px);
+            transform: translateY(-170px);
+}
+.per-list li:nth-child(6)
+{
+    -webkit-transform: translateY(-204px);
+            transform: translateY(-204px);
+}
+.per-list li:nth-child(7)
+{
+    -webkit-transform: translateY(-238px);
+            transform: translateY(-238px);
+}
+.per-list li:nth-child(8)
+{
+    -webkit-transform: translateY(-272px);
+            transform: translateY(-272px);
+}
+.active .per-list li
+{
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+
+    opacity: 1;
+}
+
+
 /* @keyframes */
 @-webkit-keyframes light
 {
@@ -362,47 +511,17 @@ body
         box-shadow: 0 0 60px #fff582;
     }
 }
-@-webkit-keyframes isme
-{
-    0%
-    {
-        box-shadow: 0 0 10px #00abff;
-    }
-    50%
-    {
-        box-shadow: 0 0 20px #00abff;
-    }
-    100%
-    {
-        box-shadow: 0 0 10px #00abff;
-    }
-}
-@keyframes isme
-{
-    0%
-    {
-        box-shadow: 0 0 10px #00abff;
-    }
-    50%
-    {
-        box-shadow: 0 0 20px #00abff;
-    }
-    100%
-    {
-        box-shadow: 0 0 10px #00abff;
-    }
-}
 
 @-webkit-keyframes header
 {
     0%
     {
-        top: 120%;
+        top: 100%;
     }
-    80%
+    /*80%
     {
         top: 20%;
-    }
+    }*/
     100%
     {
         top: 25%;
@@ -413,12 +532,12 @@ body
 {
     0%
     {
-        top: 120%;
+        top: 100%;
     }
-    80%
+    /*80%
     {
         top: 20%;
-    }
+    }*/
     100%
     {
         top: 25%;
@@ -428,12 +547,12 @@ body
 {
     0%
     {
-        top: 120%;
+        top: 100%;
     }
-    80%
+    /*80%
     {
         top: 45%;
-    }
+    }*/
     100%
     {
         top: 50%;
@@ -443,12 +562,12 @@ body
 {
     0%
     {
-        top: 120%;
+        top: 100%;
     }
-    80%
+    /*80%
     {
         top: 45%;
-    }
+    }*/
     100%
     {
         top: 50%;
@@ -458,12 +577,12 @@ body
 {
     0%
     {
-        top: 120%;
+        top: 100%;
     }
-    70%
+    /*70%
     {
         top: 45%;
-    }
+    }*/
     100%
     {
         top: 50%;
@@ -473,12 +592,12 @@ body
 {
     0%
     {
-        top: 120%;
+        top: 100%;
     }
-    70%
+    /*70%
     {
         top: 45%;
-    }
+    }*/
     100%
     {
         top: 50%;
