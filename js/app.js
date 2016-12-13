@@ -29,6 +29,7 @@ function load() {
 	},4001);
 	//第一页
 	utils.$('.next-pagetwo')[0].addEventListener('click', nextPage,false);
+	utils.$('.next-pagethree')[0].addEventListener('click', nextPage,false);
 	function nextPage(){
 		page++;
 		translate -= height;
@@ -53,8 +54,20 @@ function load() {
 		utils.addClass($page[page], 'active');
 	}
 	//第二页
-	// var perList = utils.$('.per-list li');
-	// for(var i = 0, len = perList.length; i < len; i++){
+	//
+	//
+	//
+	//
+	//触摸滑动
+	var startX = 0, startY = 0;
+	utils.$('.container')[0].addEventListener(_this.touchstart, touchstart, false);
+	utils.$('.container')[0].addEventListener(_this.touchmove, touchmove, false);
+	utils.$('.container')[0].addEventListener(_this.touchend, touchend, false);
 
-	// }
+
+	function touchstart(e){
+		
+	}
+
+
 }
