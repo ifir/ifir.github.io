@@ -59,8 +59,8 @@ ul
     width: 100%;
     height: 100%;
 
-    -webkit-transition: opacity 1s 40s;
-            transition: opacity 1s 40s;
+    -webkit-transition: opacity 1s 4s;
+            transition: opacity 1s 4s;
 
     opacity: 1;
     background: #000;
@@ -418,8 +418,19 @@ ul
 
     opacity: 1;
 }
-
-
+/* 雷达图 */
+.radar-box{
+    width: 200px;
+    height: 200px;
+    margin: 25% auto 0 auto;
+    position: relative;
+}
+.radar-box canvas{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 /* @keyframes */
 @-webkit-keyframes light
 {

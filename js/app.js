@@ -34,11 +34,100 @@ function load() {
 		utils.$('body')[0].addEventListener('touchstart', touchstart, false);
 		utils.$('body')[0].addEventListener('touchmove', touchmove, false);
 		utils.$('body')[0].addEventListener('touchend', touchend, false);
-	},4001);
-	//第一页
-	utils.$('.next-pagetwo')[0].addEventListener('click', nextPage,false);
-	utils.$('.next-pagethree')[0].addEventListener('click', nextPage,false);
-	//第二页
+	},1);
+	//每一页下的小箭头绑定事件
+	for(var j = 0; j < pageNum; j++){
+		utils.$('.next')[j].addEventListener('click', nextPage, false);
+	}
+	//雷达图
+	var $radarBox = utils.$('.radar-box')[0];
+	var radarData = [
+		['HTML5', 0.8],
+		['CSS3', 0.9],
+		['JS', 0.8],
+		['Jquery/Zepto', 0.85],
+		['PS', 0.7],
+		['Gulp/Webpack', 0.75],
+		['React/Vue', 0.7]
+	];
+	//绘制雷达图背景
+	var cvsbg = document.createElement('canvas');
+	var ctxbg = cvsbg.getContext('2d');
+	cvsbg.width = 400;
+	cvsbg.height = 400;
+	$radarBox.appendChild(cvsbg);
+
+	//计算多边形顶点坐标
+	// X坐标 = 圆心的x坐标 + Math.sin(弧度) * 半径;
+	// Y坐标 = 圆心的y坐标 + Math.cos(弧度) * 半径;
+	// 弧度 = (2*Math.PI/360) * (365/多边形的定点数) * 多边形第几个顶点;
+	for(var s = 5; s > 0; s--){
+		ctxbg.beginPath();
+		for(var k = 0, len = radarData.length; k < len; k++){
+			var rad = (2*Math.PI/360) * (365/len) * k;
+			var x = 200 + Math.sin(rad) * 200 * (s/5);
+			var y = 200 + Math.cos(rad) * 200 * (s/5);
+			ctxbg.lineTo(x,y);
+		}
+		ctxbg.closePath();
+		if(s%2){
+			ctxbg.fillStyle = '#d3c9c4';
+		}else{
+			ctxbg.fillStyle = '#d9d6d5';
+		}
+		ctxbg.fill();
+	}
+	ctxbg.beginPath();
+	//绘制伞骨
+	for(var n = 0, len = radarData.length; n < len; n++){
+		var rad = (2*Math.PI/360) * (365/len) * n;
+		var x = 200 + Math.sin(rad) * 200;
+		var y = 200 + Math.cos(rad) * 200;
+		ctxbg.moveTo(200, 200);
+		ctxbg.lineTo(x, y)
+		// ctxbg.arc(x, y, 5, 0, Math.PI*2);
+	}
+	ctxbg.strokeStyle = '#e5dedb';
+	ctxbg.stroke();
+
+	//绘制雷达图数据图
+	var cvsdata = document.createElement('canvas');
+	var ctxdata = cvsbg.getContext('2d');
+	cvsdata.width = 400;
+	cvsdata.height = 400;
+	$radarBox.appendChild(cvsdata);
+	function renderRadar(per){
+		//绘制折线
+		ctxdata.beginPath();
+		for(var n = 0, len = radarData.length; n < len; n++){
+			var rate = radarData[n][1];
+			var rad = (2*Math.PI/360) * (365/len) * n;
+			var x = 200 + Math.sin(rad) * 200 * rate;
+			var y = 200 + Math.cos(rad) * 200 * rate;
+			ctxdata.lineTo(x, y)
+		}
+		ctxdata.closePath();
+		ctxdata.fillStyle = 'rgba(241, 212, 199, 0.35)';
+		ctxdata.fill();
+		ctxdata.lineWidth = 4;
+		ctxdata.strokeStyle = "#a19088";
+		ctxdata.stroke();
+
+
+		//绘制小圆点
+		for(var j = 0, len = radarData.length; j < len; j++){
+			var rate = radarData[j][1];
+			var rad = (2*Math.PI/360) * (365/len) * j;
+			var x = 200 + Math.sin(rad) * 200 * rate;
+			var y = 200 + Math.cos(rad) * 200 * rate;
+			ctxdata.beginPath();
+			ctxdata.arc(x, y, 5, 0, Math.PI*2);
+			ctxdata.closePath();
+			ctxdata.fillStyle = '#919191';
+			ctxdata.fill();
+		}
+	}
+	renderRadar(1);
 	//下一页切换事件
 	function nextPage(){
 		if(page === pageNum) return;
@@ -67,7 +156,6 @@ function load() {
 	}
 	//触摸事件
 	function touchstart(e){
-		startTime = Date.now();
 		isTouch = true;
 		//startX = e.touches[0].pageX;
 		startY = e.touches[0].pageY;
@@ -81,10 +169,10 @@ function load() {
 	}
 	function touchend(e){
 		if(!isMove) return;
-		endTime = Date.now();
 		var timer = null;
-		var touchTime = endTime - startTime;
 		isTouch = false;
+		isMove = false;
+		startY = 0;
 		//判断是否为上下滑动
 		//向上滑动
 		clearTimeout(timer);
