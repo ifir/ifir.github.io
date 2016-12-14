@@ -59,8 +59,8 @@ ul
     width: 100%;
     height: 100%;
 
-    -webkit-transition: opacity 1s 4s;
-            transition: opacity 1s 4s;
+    -webkit-transition: opacity 1s 40s;
+            transition: opacity 1s 40s;
 
     opacity: 1;
     background: #000;
@@ -142,6 +142,7 @@ ul
     -webkit-animation: text 2s infinite alternate;
             animation: text 2s infinite alternate;
     text-align: center;
+    color: #686551;
 }
 /* 第一页 */
 .section-pageone
