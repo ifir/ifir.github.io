@@ -25,7 +25,7 @@ function load() {
 				prevPage();
 			}
 		});
-	},1);
+	},4001);
 	//第一页
 	utils.$('.next-pagetwo')[0].addEventListener('click', nextPage,false);
 	utils.$('.next-pagethree')[0].addEventListener('click', nextPage,false);
@@ -34,7 +34,6 @@ function load() {
 		page++;
 		translate -= height;
 		var $page = utils.$('.page');
-		console.log(page)
 		utils.$('.container')[0].style.transform = "translateY(" + translate + "px)";
 		utils.$('.container')[0].style.webkitTransform = "translateY(" + translate + "px)";
 		for(var i = 0, len = $page.length; i < len; i++){
@@ -64,9 +63,9 @@ function load() {
 		offsetX = 0, offsetY = 0,
 		isTouch = false, isMove = false,
 		startTime = 0, endTime = 0;
-	utils.$('.container')[0].addEventListener('touchstart', touchstart, false);
-	utils.$('.container')[0].addEventListener('touchmove', touchmove, false);
-	utils.$('.container')[0].addEventListener('touchend', touchend, false);
+	utils.$('body')[0].addEventListener('touchstart', touchstart, false);
+	utils.$('body')[0].addEventListener('touchmove', touchmove, false);
+	utils.$('body')[0].addEventListener('touchend', touchend, false);
 
 
 	function touchstart(e){
@@ -74,20 +73,19 @@ function load() {
 		isTouch = true;
 		//startX = e.touches[0].pageX;
 		startY = e.touches[0].pageY;
-		console.log('touchstart')
 	}
 	function touchmove(e){
 		if(!isTouch) return;
 		//offsetX = e.touches[0].pageX - startX;
 		offsetY = e.touches[0].pageY - startY;
 		//判断是否为真的移动了
-		console.log(offsetY)
 		isMove = Math.abs(offsetY) > 11 ? true : false;
 	}
 	function touchend(e){
 		if(!isMove) return;
 		endTime = Date.now();
 		var touchTime = endTime - startTime;
+		isTouch = false;
 		//判断是否为上下滑动
 		//向上滑动
 		if(Math.abs(offsetY) > 10 && offsetY < 0){
