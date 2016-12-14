@@ -34,7 +34,7 @@ function load() {
 		utils.$('body')[0].addEventListener('touchstart', touchstart, false);
 		utils.$('body')[0].addEventListener('touchmove', touchmove, false);
 		utils.$('body')[0].addEventListener('touchend', touchend, false);
-	},1);
+	},4001);
 	//每一页下的小箭头绑定事件
 	for(var j = 0; j < pageNum; j++){
 		utils.$('.next')[j].addEventListener('click', nextPage, false);
