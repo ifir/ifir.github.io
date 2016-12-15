@@ -60,15 +60,8 @@ ul
     width: 100%;
     height: 100%;
 
-    -webkit-transition: opacity 1s 4s;
-            transition: opacity 1s 4s;
-
     opacity: 1;
     background: #000;
-}
-.loaded
-{
-    opacity: 0;
 }
 .loading-wrap
 {
@@ -296,7 +289,9 @@ ul
 }
 /* 第二页 */
 .section-pagetwo,
-.section-pagethree
+.section-pagethree,
+.section-pagefour,
+.section-pagefive
 {
     position: relative;
 
@@ -341,6 +336,14 @@ ul
 .icon-skills
 {
     background: url('../img/Tools.png') center center no-repeat;
+    background-size: 30px 30px;
+}
+.icon-experienece{
+    background: url('../img/Lightbulb.png') center center no-repeat;
+    background-size: 30px 30px;
+}
+.icon-show{
+    background: url('../img/Monitor.png') center center no-repeat;
     background-size: 30px 30px;
 }
 .per-list

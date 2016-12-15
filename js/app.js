@@ -14,7 +14,6 @@ function load() {
 		offsetX = 0, offsetY = 0,
 		isTouch = false, isMove = false,
 		startTime = 0, endTime = 0;
-	utils.addClass($loading, 'loaded');
 	clearTimeout(timer);
 	timer = setTimeout(function(){
 		//移除loading节点
@@ -34,7 +33,7 @@ function load() {
 		utils.$('body')[0].addEventListener('touchstart', touchstart, false);
 		utils.$('body')[0].addEventListener('touchmove', touchmove, false);
 		utils.$('body')[0].addEventListener('touchend', touchend, false);
-	},4001);
+	},3000);
 	//每一页下的小箭头绑定事件
 	for(var j = 0; j < pageNum; j++){
 		utils.$('.next')[j].addEventListener('click', nextPage, false);
