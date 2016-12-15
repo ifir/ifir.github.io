@@ -440,10 +440,10 @@ ul
     margin: 0;
     padding: 0;
 
-    -webkit-transition: opacity .5s ease 1.6s;
-            transition: opacity .5s ease 1.6s;
+    -webkit-transition: visibility .5s ease 1.6s;
+            transition: visibility .5s ease 1.6s;
 
-    opacity: 0;
+    visibility: hidden;
     color: #a19088;
 }
 .active .radar-box span
@@ -451,7 +451,7 @@ ul
     -webkit-animation: bounceIn .75s 1.6s;
             animation: bounceIn .75s 1.6s;
 
-    opacity: 1;
+    visibility: visible;
 }
 /* @keyframes */
 @-webkit-keyframes light
@@ -657,8 +657,6 @@ ul
     {
         -webkit-transform: scale3d(.3, .3, .3);
                 transform: scale3d(.3, .3, .3);
-
-        opacity: 0;
     }
 
     20%
@@ -677,8 +675,6 @@ ul
     {
         -webkit-transform: scale3d(1.03, 1.03, 1.03);
                 transform: scale3d(1.03, 1.03, 1.03);
-
-        opacity: 1;
     }
 
     80%
@@ -691,8 +687,6 @@ ul
     {
         -webkit-transform: scale3d(1, 1, 1);
                 transform: scale3d(1, 1, 1);
-
-        opacity: 1;
     }
 }
 
@@ -713,8 +707,6 @@ ul
     {
         -webkit-transform: scale3d(.3, .3, .3);
                 transform: scale3d(.3, .3, .3);
-
-        opacity: 0;
     }
 
     20%
@@ -733,8 +725,6 @@ ul
     {
         -webkit-transform: scale3d(1.03, 1.03, 1.03);
                 transform: scale3d(1.03, 1.03, 1.03);
-
-        opacity: 1;
     }
 
     80%
@@ -747,7 +737,5 @@ ul
     {
         -webkit-transform: scale3d(1, 1, 1);
                 transform: scale3d(1, 1, 1);
-
-        opacity: 1;
     }
 }
