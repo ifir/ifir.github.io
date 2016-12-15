@@ -4,15 +4,15 @@ body
     font-family: 'Microsoft YaHei',Arial,Helvetica,sans-serif;
     font-size: 12px;
 
+    overflow: hidden;
+
     height: 100%;
 
     color: #222;
     background: #fff;
-    overflow: hidden;
 }
 body
 {
-
     min-width: 300px;
     max-width: 640px;
     min-height: 100%;
@@ -39,6 +39,7 @@ ul
     width: 100%;
     height: 100%;
     min-height: 100%;
+
     -webkit-transition: -webkit-transform 1s cubic-bezier(.65, .05, .36, 1);
             transition: -webkit-transform 1s cubic-bezier(.65, .05, .36, 1);
             transition:         transform 1s cubic-bezier(.65, .05, .36, 1);
@@ -142,6 +143,7 @@ ul
     -webkit-animation: text 2s infinite alternate;
             animation: text 2s infinite alternate;
     text-align: center;
+
     color: #686551;
 }
 /* 第一页 */
@@ -223,22 +225,16 @@ ul
 }
 .active .header
 {
-    /*-webkit-animation: header 1.5s ease-in-out;
-            animation: header 1.5s ease-in-out;*/
     -webkit-animation: header 1.5s cubic-bezier(.68, -.55, .27, 1.55);
             animation: header 1.5s cubic-bezier(.68, -.55, .27, 1.55);
 }
 .active .name
 {
-    /*-webkit-animation: name 1.6s ease-in-out ;
-            animation: name 1.6s ease-in-out ;*/
     -webkit-animation: name 1.6s cubic-bezier(.68, -.55, .27, 1.55);
             animation: name 1.6s cubic-bezier(.68, -.55, .27, 1.55);
 }
 .active .job
 {
-    /*-webkit-animation: job 1.7s ease-in-out;
-            animation: job 1.7s ease-in-out;*/
     -webkit-animation: job 1.7s cubic-bezier(.68, -.55, .27, 1.55);
             animation: job 1.7s cubic-bezier(.68, -.55, .27, 1.55);
 }
@@ -293,7 +289,7 @@ ul
     -webkit-transform: rotateZ(-30deg);
             transform: rotateZ(-30deg);
 }
-.next
+.active .next
 {
     -webkit-animation: nextpagetwo 1s ease-in-out infinite alternate;
             animation: nextpagetwo 1s ease-in-out infinite alternate;
@@ -419,17 +415,43 @@ ul
     opacity: 1;
 }
 /* 雷达图 */
-.radar-box{
+.radar-box
+{
+    position: relative;
+
     width: 200px;
     height: 200px;
     margin: 25% auto 0 auto;
-    position: relative;
 }
-.radar-box canvas{
-    width: 100%;
+.radar-box canvas
+{
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
+
+    width: 100%;
+}
+.radar-box span
+{
+    font-size: 14px;
+
+    position: absolute;
+
+    margin: 0;
+    padding: 0;
+
+    -webkit-transition: opacity .5s ease 1.6s;
+            transition: opacity .5s ease 1.6s;
+
+    opacity: 0;
+    color: #a19088;
+}
+.active .radar-box span
+{
+    -webkit-animation: bounceIn .75s 1.6s;
+            animation: bounceIn .75s 1.6s;
+
+    opacity: 1;
 }
 /* @keyframes */
 @-webkit-keyframes light
@@ -529,10 +551,7 @@ ul
     {
         top: 100%;
     }
-    /*80%
-    {
-        top: 20%;
-    }*/
+
     100%
     {
         top: 25%;
@@ -545,10 +564,7 @@ ul
     {
         top: 100%;
     }
-    /*80%
-    {
-        top: 20%;
-    }*/
+
     100%
     {
         top: 25%;
@@ -560,10 +576,7 @@ ul
     {
         top: 100%;
     }
-    /*80%
-    {
-        top: 45%;
-    }*/
+
     100%
     {
         top: 50%;
@@ -575,10 +588,7 @@ ul
     {
         top: 100%;
     }
-    /*80%
-    {
-        top: 45%;
-    }*/
+
     100%
     {
         top: 50%;
@@ -590,10 +600,7 @@ ul
     {
         top: 100%;
     }
-    /*70%
-    {
-        top: 45%;
-    }*/
+
     100%
     {
         top: 50%;
@@ -605,10 +612,7 @@ ul
     {
         top: 100%;
     }
-    /*70%
-    {
-        top: 45%;
-    }*/
+
     100%
     {
         top: 50%;
@@ -634,5 +638,116 @@ ul
     100%
     {
         bottom: 9%;
+    }
+}
+@-webkit-keyframes bounceIn
+{
+    from,
+    20%,
+    40%,
+    60%,
+    80%,
+    to
+    {
+        -webkit-animation-timing-function: cubic-bezier(.215, .610, .355, 1.000);
+                animation-timing-function: cubic-bezier(.215, .610, .355, 1.000);
+    }
+
+    0%
+    {
+        -webkit-transform: scale3d(.3, .3, .3);
+                transform: scale3d(.3, .3, .3);
+
+        opacity: 0;
+    }
+
+    20%
+    {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+                transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40%
+    {
+        -webkit-transform: scale3d(.9, .9, .9);
+                transform: scale3d(.9, .9, .9);
+    }
+
+    60%
+    {
+        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+                transform: scale3d(1.03, 1.03, 1.03);
+
+        opacity: 1;
+    }
+
+    80%
+    {
+        -webkit-transform: scale3d(.97, .97, .97);
+                transform: scale3d(.97, .97, .97);
+    }
+
+    to
+    {
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn
+{
+    from,
+    20%,
+    40%,
+    60%,
+    80%,
+    to
+    {
+        -webkit-animation-timing-function: cubic-bezier(.215, .610, .355, 1.000);
+                animation-timing-function: cubic-bezier(.215, .610, .355, 1.000);
+    }
+
+    0%
+    {
+        -webkit-transform: scale3d(.3, .3, .3);
+                transform: scale3d(.3, .3, .3);
+
+        opacity: 0;
+    }
+
+    20%
+    {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+                transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40%
+    {
+        -webkit-transform: scale3d(.9, .9, .9);
+                transform: scale3d(.9, .9, .9);
+    }
+
+    60%
+    {
+        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+                transform: scale3d(1.03, 1.03, 1.03);
+
+        opacity: 1;
+    }
+
+    80%
+    {
+        -webkit-transform: scale3d(.97, .97, .97);
+                transform: scale3d(.97, .97, .97);
+    }
+
+    to
+    {
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+
+        opacity: 1;
     }
 }

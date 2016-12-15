@@ -42,13 +42,13 @@ function load() {
 	//雷达图
 	var $radarBox = utils.$('.radar-box')[0];
 	var radarData = [
+		['Gulp/Webpack', 0.75],
+		['React/Vue', 0.7],
 		['HTML5', 0.8],
 		['CSS3', 0.9],
-		['JS', 0.8],
-		['Jquery/Zepto', 0.85],
+		['JS', 0.85],
 		['PS', 0.7],
-		['Gulp/Webpack', 0.75],
-		['React/Vue', 0.7]
+		['Jquery/Zepto', 0.85]
 	];
 	//绘制雷达图背景
 	var cvsbg = document.createElement('canvas');
@@ -80,31 +80,41 @@ function load() {
 	ctxbg.beginPath();
 	//绘制伞骨
 	for(var n = 0, len = radarData.length; n < len; n++){
+
 		var rad = (2*Math.PI/360) * (365/len) * n;
 		var x = 200 + Math.sin(rad) * 200;
 		var y = 200 + Math.cos(rad) * 200;
 		ctxbg.moveTo(200, 200);
 		ctxbg.lineTo(x, y)
-		// ctxbg.arc(x, y, 5, 0, Math.PI*2);
+		//绘制文字
+		var span = document.createElement('span');
+		span.innerHTML = radarData[n][0];
+		//判断文字左右
+		x > 400/2 ? (span.style.left = x/2 + 'px') : (span.style.right = (400 - x)/2 + 'px');
+		//判断文字上下
+		y > 400/2 ? (span.style.top = (y/2 ) + 'px') : (span.style.bottom = ((400 - y)/2) + 'px');
+		if(x === 400/2 ){span.style.left = (x/2 - 50) + 'px';}
+		$radarBox.appendChild(span);
 	}
 	ctxbg.strokeStyle = '#e5dedb';
 	ctxbg.stroke();
 
 	//绘制雷达图数据图
 	var cvsdata = document.createElement('canvas');
-	var ctxdata = cvsbg.getContext('2d');
+	var ctxdata = cvsdata.getContext('2d');
 	cvsdata.width = 400;
 	cvsdata.height = 400;
 	$radarBox.appendChild(cvsdata);
 	function renderRadar(per){
+		ctxdata.clearRect(0,0,400,400);
 		//绘制折线
 		ctxdata.beginPath();
 		for(var n = 0, len = radarData.length; n < len; n++){
-			var rate = radarData[n][1];
+			var rate = radarData[n][1] * per;
 			var rad = (2*Math.PI/360) * (365/len) * n;
 			var x = 200 + Math.sin(rad) * 200 * rate;
 			var y = 200 + Math.cos(rad) * 200 * rate;
-			ctxdata.lineTo(x, y)
+			ctxdata.lineTo(x, y);
 		}
 		ctxdata.closePath();
 		ctxdata.fillStyle = 'rgba(241, 212, 199, 0.35)';
@@ -116,8 +126,8 @@ function load() {
 
 		//绘制小圆点
 		for(var j = 0, len = radarData.length; j < len; j++){
-			var rate = radarData[j][1];
-			var rad = (2*Math.PI/360) * (365/len) * j;
+			var rate = radarData[j][1] * per;
+			var rad = (2*Math.PI/360) * (365/len) * j ;
 			var x = 200 + Math.sin(rad) * 200 * rate;
 			var y = 200 + Math.cos(rad) * 200 * rate;
 			ctxdata.beginPath();
@@ -127,7 +137,6 @@ function load() {
 			ctxdata.fill();
 		}
 	}
-	renderRadar(1);
 	//下一页切换事件
 	function nextPage(){
 		if(page === pageNum) return;
@@ -140,6 +149,23 @@ function load() {
 			utils.removeClass($page[i], 'active');
 		}
 		utils.addClass($page[page], 'active');
+		if(utils.hasClass(utils.$('.section-pagethree')[0], 'active')){
+			var speed = 0;
+			var timeid = null;
+			for(var u = 0; u < 100; u++){
+				speed += 0.01;
+				(function(speed){
+					timeid = setTimeout(function(){
+						renderRadar(speed);
+					},u*10+500);
+				})(speed);
+			}
+		}else{
+			timeid = setTimeout(function(){
+				renderRadar(0);
+			},500);
+		}
+		clearTimeout(timeid);
 	}
 	//上一页切换事件
 	function prevPage(){
@@ -153,6 +179,23 @@ function load() {
 			utils.removeClass($page[i], 'active');
 		}
 		utils.addClass($page[page], 'active');
+		if(utils.hasClass(utils.$('.section-pagethree')[0], 'active')){
+			var speed = 0;
+			var timeid = null;
+			for(var u = 0; u < 100; u++){
+				speed += 0.01;
+				(function(speed){
+					timeid = setTimeout(function(){
+						renderRadar(speed);
+					},u*10+500);
+				})(speed);
+			}
+		}else{
+			timeid = setTimeout(function(){
+				renderRadar(0);
+			},500);
+		}
+		clearTimeout(timeid);
 	}
 	//触摸事件
 	function touchstart(e){
