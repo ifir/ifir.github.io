@@ -437,21 +437,24 @@ ul
 
     position: absolute;
 
+    visibility: hidden;
+
     margin: 0;
     padding: 0;
 
-    -webkit-transition: visibility .5s ease 1.6s;
-            transition: visibility .5s ease 1.6s;
+    -webkit-transition: visibility .5s ease .5s;
+            transition: visibility .5s ease .5s;
 
-    visibility: hidden;
     color: #a19088;
 }
 .active .radar-box span
 {
+    visibility: visible;
+
+    -webkit-transition: visibility .5s ease 1.6s;
+            transition: visibility .5s ease 1.6s;
     -webkit-animation: bounceIn .75s 1.6s;
             animation: bounceIn .75s 1.6s;
-
-    visibility: visible;
 }
 /* @keyframes */
 @-webkit-keyframes light
