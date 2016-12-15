@@ -1,3 +1,4 @@
+'use strict';
 window.addEventListener('load', load, false);
 
 function load() {
@@ -38,6 +39,7 @@ function load() {
 	for(var j = 0; j < pageNum; j++){
 		utils.$('.next')[j].addEventListener('click', nextPage, false);
 	}
+	utils.$('.prev')[0].addEventListener('click', prevPage, false);
 	//雷达图
 	var $radarBox = utils.$('.radar-box')[0];
 	var radarData = [
@@ -46,7 +48,7 @@ function load() {
 		['HTML5', 0.8],
 		['CSS3', 0.9],
 		['JS', 0.85],
-		['PS', 0.7],
+		['PS/AI', 0.7],
 		['Jquery/Zepto', 0.85]
 	];
 	//绘制雷达图背景
@@ -91,7 +93,7 @@ function load() {
 		//判断文字左右
 		x > 400/2 ? (span.style.left = x/2 + 'px') : (span.style.right = (400 - x)/2 + 'px');
 		//判断文字上下
-		y > 400/2 ? (span.style.top = (y/2 ) + 'px') : (span.style.bottom = ((400 - y)/2) + 'px');
+		y > 400/2 ? (span.style.top = y/2 + 'px') : (span.style.bottom = ((400 - y)/2) + 'px');
 		if(x === 400/2 ){span.style.left = (x/2 - 50) + 'px';}
 		$radarBox.appendChild(span);
 	}
@@ -148,9 +150,9 @@ function load() {
 			utils.removeClass($page[i], 'active');
 		}
 		utils.addClass($page[page], 'active');
+		var timeid = null;
 		if(utils.hasClass(utils.$('.section-pagethree')[0], 'active')){
 			var speed = 0;
-			var timeid = null;
 			for(var u = 0; u < 100; u++){
 				speed += 0.01;
 				(function(speed){
@@ -178,9 +180,9 @@ function load() {
 			utils.removeClass($page[i], 'active');
 		}
 		utils.addClass($page[page], 'active');
+		var timeid = null;
 		if(utils.hasClass(utils.$('.section-pagethree')[0], 'active')){
 			var speed = 0;
-			var timeid = null;
 			for(var u = 0; u < 100; u++){
 				speed += 0.01;
 				(function(speed){
