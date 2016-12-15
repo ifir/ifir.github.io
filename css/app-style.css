@@ -34,19 +34,24 @@ ul
 {
     text-align: center;
 }
-.pull-left{
+.pull-left
+{
     float: left;
 }
-.pull-right{
+.pull-right
+{
     float: right;
 }
-.clearfix:after{
-    content: '';
+.clearfix:after
+{
     display: block;
-    height: 0;
-    width: 0;
-    clear: both;
     visibility: hidden;
+    clear: both;
+
+    width: 0;
+    height: 0;
+
+    content: '';
 }
 .container
 {
@@ -178,10 +183,12 @@ ul
     z-index: 99;
     top: 25%;
     left: 50%;
-    margin-left: -15%;
+
     width: 30%;
-    cursor: pointer;
     height: auto;
+    margin-left: -15%;
+
+    cursor: pointer;
 }
 .isme
 {
@@ -248,7 +255,8 @@ ul
             animation: job 1.7s cubic-bezier(.68, -.55, .27, 1.55);
 }
 
-.next, .prev
+.next,
+.prev
 {
     position: absolute;
     bottom: 5%;
@@ -260,7 +268,8 @@ ul
 
     cursor: pointer;
 }
-.next span, .prev span
+.next span,
+.prev span
 {
     position: relative;
 
@@ -300,18 +309,22 @@ ul
     -webkit-transform: rotateZ(-30deg);
             transform: rotateZ(-30deg);
 }
-.prev span:before{
+.prev span:before
+{
     left: 12px;
+
     -webkit-transform: rotateZ(-30deg);
             transform: rotateZ(-30deg);
 }
-.prev span:after{
+.prev span:after
+{
     right: 12px;
 
     -webkit-transform: rotateZ(30deg);
             transform: rotateZ(30deg);
 }
-.active .next, .active .prev
+.active .next,
+.active .prev
 {
     -webkit-animation: nextpagetwo 1s ease-in-out infinite alternate;
             animation: nextpagetwo 1s ease-in-out infinite alternate;
@@ -368,15 +381,18 @@ ul
     background: url('../img/Tools.png') center center no-repeat;
     background-size: 30px 30px;
 }
-.icon-experienece{
+.icon-experienece
+{
     background: url('../img/Lightbulb.png') center center no-repeat;
     background-size: 30px 30px;
 }
-.icon-show{
+.icon-show
+{
     background: url('../img/Monitor.png') center center no-repeat;
     background-size: 30px 30px;
 }
-.icon-msg{
+.icon-msg
+{
     background: url('../img/Message.png') center center no-repeat;
     background-size: 30px 30px;
 }
@@ -494,168 +510,217 @@ ul
             animation: bounceIn .75s 1.6s;
 }
 /* 第四页 */
-.project-box{
+.project-box
+{
     width: 80%;
     margin: 20px auto 0 auto;
 }
-.project-desc{
+.project-desc
+{
     display: inline-block;
 }
-.firm-label{
-    text-align: left;
+.firm-label
+{
     -webkit-transition: all 1.2s ease .6s;
-    transition: all 1.2s ease .6s;
+            transition: all 1.2s ease .6s;
     -webkit-transform: translateX(120%);
             transform: translateX(120%);
+    text-align: left;
 }
-.label{
+.label
+{
     display: inline-block;
-    background: url('../img/Label-add.png') no-repeat center center;
-    background-size: 30px 30px;
+
     width: 30px;
     height: 30px;
+
     vertical-align: middle;
+
+    background: url('../img/Label-add.png') no-repeat center center;
+    background-size: 30px 30px;
 }
-.firm-name{
+.firm-name
+{
     display: inline-block;
+
     vertical-align: middle;
+
     color: #a19088;
 }
-.firm-name h3{
+.firm-name h3
+{
     margin: 0;
 }
-.project-info p{
-    text-align: justify;
+.project-info p
+{
     font-size: 14px;
     line-height: 16px;
-    color: #7b6257;
+
+    text-align: justify;
     text-indent: 30px;
+
+    color: #7b6257;
 }
-.project-info{
+.project-info
+{
     -webkit-transition: all 1.2s ease .6s;
-    transition: all 1.2s ease .6s;
-    -webkit-transform: translateX(-120%);
-            transform: translateX(-120%);
+            transition: all 1.2s ease .6s;
+    -webkit-transform: translateX(-140%);
+            transform: translateX(-140%);
 }
-.active .project-info, .active .firm-label{
+.active .project-info,
+.active .firm-label
+{
     -webkit-transform: translateX(0);
             transform: translateX(0);
 }
 /* 第五页 */
-.show-link{
-    margin-top: 20px;
+.show-link
+{
     display: inline-block;
+
+    margin-top: 20px;
 }
-.show-link li{
+.show-link li
+{
     margin: 10px 0;
+
+            -webkit-transition: all 1.2s ease .6s;
+
+            transition:         all 1.2s ease .6s;
     -webkit-transform: translateX(120%);
             transform: translateX(120%);
-    -webkit-transition: -webkit-transform 1.2s ease .6s;
-    transition: -webkit-transform 1.2s ease .6s;
-    transition: transform 1.2s ease .6s;
-    transition: transform 1.2s ease .6s, -webkit-transform 1.2s ease .6s;
+
+    opacity: 0;
 }
-.show-link a{
+.show-link a
+{
     display: block;
-    text-decoration: none;
+
     text-align: left;
+    text-decoration: none;
 }
-.link{
+.link
+{
     display: inline-block;
+
     width: 30px;
     height: 30px;
+    margin-top: 6px;
+
+    vertical-align: middle;
+
     background: url('../img/Label.png') no-repeat center center;
     background-size: 30px 30px;
-    vertical-align: middle;
-    margin-top: 6px;
 }
-.link-text{
+.link-text
+{
     display: inline-block;
+
     text-align: left;
     vertical-align: middle;
 }
-.link-text p{
+.link-text p
+{
     line-height: 16px;
+
     margin: 0;
-    color: #7b6257;
+
     text-decoration: underline;
+
+    color: #7b6257;
 }
-.active .show-link li:nth-child(1){
-    -webkit-transition: -webkit-transform 1.2s ease .6s;
-    transition: -webkit-transform 1.2s ease .6s;
-    transition: transform 1.2s ease .6s;
-    transition: transform 1.2s ease .6s, -webkit-transform 1.2s ease .6s;
+.active .show-link li:nth-child(1)
+{
+    -webkit-transition: all 1.2s ease .6s;
+            transition: all 1.2s ease .6s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.active .show-link li:nth-child(2){
-    -webkit-transition: -webkit-transform 1.2s ease .8s;
-    transition: -webkit-transform 1.2s ease .8s;
-    transition: transform 1.2s ease .8s;
-    transition: transform 1.2s ease .8s, -webkit-transform 1.2s ease .8s;
+.active .show-link li:nth-child(2)
+{
+    -webkit-transition: all 1.2s ease .8s;
+            transition: all 1.2s ease .8s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.active .show-link li:nth-child(3){
-    -webkit-transition: -webkit-transform 1.2s ease 1s;
-    transition: -webkit-transform 1.2s ease 1s;
-    transition: transform 1.2s ease 1s;
-    transition: transform 1.2s ease 1s, -webkit-transform 1.2s ease 1s;
+.active .show-link li:nth-child(3)
+{
+    -webkit-transition: all 1.2s ease 1s;
+            transition: all 1.2s ease 1s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.active .show-link li:nth-child(4){
-    -webkit-transition: -webkit-transform 1.2s ease 1.2s;
-    transition: -webkit-transform 1.2s ease 1.2s;
-    transition: transform 1.2s ease 1.2s;
-    transition: transform 1.2s ease 1.2s, -webkit-transform 1.2s ease 1.2s;
+.active .show-link li:nth-child(4)
+{
+    -webkit-transition: all 1.2s ease 1.2s;
+            transition: all 1.2s ease 1.2s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.active .show-link li:nth-child(5){
-    -webkit-transition: -webkit-transform 1.2s ease 1.4s;
-    transition: -webkit-transform 1.2s ease 1.4s;
-    transition: transform 1.2s ease 1.4s;
-    transition: transform 1.2s ease 1.4s, -webkit-transform 1.2s ease 1.4s;
+.active .show-link li:nth-child(5)
+{
+    -webkit-transition: all 1.2s ease 1.4s;
+            transition: all 1.2s ease 1.4s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.active .show-link li:nth-child(6){
-    -webkit-transition: -webkit-transform 1.2s ease 1.6s;
-    transition: -webkit-transform 1.2s ease 1.6s;
-    transition: transform 1.2s ease 1.6s;
-    transition: transform 1.2s ease 1.6s, -webkit-transform 1.2s ease 1.6s;
+.active .show-link li:nth-child(6)
+{
+    -webkit-transition: all 1.2s ease 1.6s;
+            transition: all 1.2s ease 1.6s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.active .show-link li:nth-child(7){
-    -webkit-transition: -webkit-transform 1.2s ease 1.8s;
-    transition: -webkit-transform 1.2s ease 1.8s;
-    transition: transform 1.2s ease 1.8s;
-    transition: transform 1.2s ease 1.8s, -webkit-transform 1.2s ease 1.8s;
+.active .show-link li:nth-child(7)
+{
+    -webkit-transition: all 1.2s ease 1.8s;
+            transition: all 1.2s ease 1.8s;
     -webkit-transform: translateX(0);
             transform: translateX(0);
+
+    opacity: 1;
 }
-.conclusion{
+.conclusion
+{
     width: 80%;
     margin: 0 auto;
+
     text-align: left;
 }
-.conclusion p{
-    margin: 30px;
+.conclusion p
+{
     font-size: 14px;
-    text-indent: 30px;
     line-height: 18px;
-    color: #a19088;
-    text-align: justify;
-    opacity: 0;
+
+    margin: 30px;
+
     -webkit-transition: all 1s ease .6s;
-    transition: all 1s ease .6s;
+            transition: all 1s ease .6s;
+    text-align: justify;
+    text-indent: 30px;
+
+    opacity: 0;
+    color: #a19088;
 }
-.active .conclusion p{
-    opacity: 1;
+.active .conclusion p
+{
     -webkit-animation: color 1s ease .8s;
             animation: color 1s ease .8s;
+
+    opacity: 1;
 }
 /* @keyframes */
 @-webkit-keyframes light
@@ -943,20 +1008,25 @@ ul
                 transform: scale3d(1, 1, 1);
     }
 }
-@-webkit-keyframes color{
-    0%{
+@-webkit-keyframes color
+{
+    0%
+    {
         color: #853131;
     }
-    100%{
+    100%
+    {
         color: #a19088;
     }
 }
-@keyframes color{
-    0%{
+@keyframes color
+{
+    0%
+    {
         color: #853131;
     }
-    100%{
+    100%
+    {
         color: #a19088;
     }
 }
-
