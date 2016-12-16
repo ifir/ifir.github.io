@@ -82,11 +82,7 @@ function load() {
 				ctxbg.lineTo(point.x,point.y);
 			}
 			ctxbg.closePath();
-			if(s%2){
-				ctxbg.fillStyle = '#d3c9c4';
-			}else{
-				ctxbg.fillStyle = '#d9d6d5';
-			}
+			ctxbg.fillStyle = s%2 ? '#d3c9c4' : '#d9d6d5';
 			ctxbg.fill();
 		}
 		ctxbg.beginPath();
@@ -176,7 +172,7 @@ function load() {
 	function pageTransform(page, translate){
 		var $page = utils.$('.page');
 		utils.$('.container')[0].style.transform = "translateY(" + translate + "px)";
-		utils.$('.container')[0].style.webkitTransform = "translateY(" + translate + "px)";
+		utils.$('.container')[0].style.WebkitTransform = "translateY(" + translate + "px)";
 		for(var i = 0, len = $page.length; i < len; i++){
 			utils.removeClass($page[i], 'active');
 		}
