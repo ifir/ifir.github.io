@@ -33,21 +33,30 @@ function load() {
 		$loading.remove();
 		utils.addClass($pageone, 'active');
 		//鼠标滑轮绑定事件
-		window.addEventListener('mousewheel', function(e){
-			if(e.deltaY > 0 && page < pageNum){
-				nextPage(radarAntimate);
-			}
-			if(e.deltaY < 0 && page > 0){
-				prevPage(radarAntimate);
-			}
-		});
+		window.addEventListener('mousewheel', wheel, false);
 		var $body = utils.$('body')[0];
 		//触摸事件绑定
 		$body.addEventListener('touchstart', touchstart, false);
 		$body.addEventListener('touchmove', touchmove, false);
 		$body.addEventListener('touchend', touchend, false);
 		clearTimeout(timer);//清除loading的定时器
-	},3000);
+	},10);
+	//滑轮事件
+	function wheel(e){
+		var timer = null;
+		var deltaY = e.deltaY
+		window.removeEventListener('mousewheel', wheel, false);
+		if(deltaY > 0 && page < pageNum){
+			nextPage(radarAntimate);
+		}
+		if(deltaY < 0 && page > 0){
+			prevPage(radarAntimate);
+		}
+		timer = setTimeout(function(){
+			window.addEventListener('mousewheel', wheel, false);
+		}, 500)
+
+	}
 	//每一页下的小箭头绑定事件
 	for(var j = 0; j < pageNum; j++){
 		utils.$('.next')[j].addEventListener('click', function(){
