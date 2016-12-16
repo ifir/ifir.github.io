@@ -40,7 +40,7 @@ function load() {
 		$body.addEventListener('touchmove', touchmove, false);
 		$body.addEventListener('touchend', touchend, false);
 		clearTimeout(timer);//清除loading的定时器
-	},10);
+	}, 3000);
 	//滑轮事件
 	function wheel(e){
 		var timer = null;
