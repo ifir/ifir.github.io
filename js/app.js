@@ -50,10 +50,14 @@ function load() {
 	},3000);
 	//每一页下的小箭头绑定事件
 	for(var j = 0; j < pageNum; j++){
-		utils.$('.next')[j].addEventListener('click', nextPage, false);
+		utils.$('.next')[j].addEventListener('click', function(){
+			nextPage(radarAntimate);
+		}, false);
 	}
 	//最后一页向上的小箭头
-	utils.$('.prev')[0].addEventListener('click', prevPage, false);
+	utils.$('.prev')[0].addEventListener('click', function(){
+		prevPage(radarAntimate);
+	}, false);
 	//绘制雷达图背景
 	renderRadarBg();
 	//绘制雷达图数据图
