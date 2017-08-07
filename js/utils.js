@@ -27,3 +27,10 @@ utils.hasClass = function(ele, cls){
 		return new RegExp('(^| )' + cls + '( |$)', 'gi').test(ele.className);
 	}
 }
+utils.requestAnimationFrame = function(cb){
+	if(window.requestAnimationFrame){
+		window.requestAnimationFrame(cb);
+	}else{
+		window.setTimeout(cb, 1000 / 60);
+	}
+}
