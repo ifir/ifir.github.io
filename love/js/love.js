@@ -8,16 +8,13 @@
         var WINDOW_HEIGHT = w.innerHeight;
     }
     //移动端不支持自动播放
-    function bgmAutoplay(){
-        utils.$('#bgm')[0].onloadedmetadata = function(){
-            var e = document.createEvent("HTMLEvents");
-            e.initEvent("touchstart", true, true);
-            utils.$('#bgm')[0].dispatchEvent(e);
-        }
-        window.addEventListener('touchstart', function(){
+    utils.$('#bgm')[0].onloadedmetadata = function(){
+        alert(1)
+        d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
+        function bgmAutoPlay(){
+            alert(2)
             utils.$('#bgm')[0].play();
-        }, false);
-
+            d.documentElement.removeEventListener('touchstart', bgmAutoPlay);
+        }
     }
-    bgmAutoplay();
 })(window, document);
