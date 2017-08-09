@@ -10,7 +10,6 @@
     //移动端不支持自动播放
     d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
     function bgmAutoPlay(){
-        alert(2)
         utils.$('#bgm')[0].play();
         d.documentElement.removeEventListener('touchstart', bgmAutoPlay);
     }
