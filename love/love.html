@@ -8,13 +8,50 @@
     <title>LOVE</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/love.css">
+    <script type="text/javascript">
+        (function (doc, win) {
+            var UIwidth = 750;
+            var remWidth = UIwidth;
+            var minWidth = 320;
+            var maxWidth = 1024;
+            var docEl = document.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+            var recalc = function () {
+                var width = docEl.clientWidth;
+                if (width < minWidth) {
+                    width = minWidth;
+                }
+                if (width > maxWidth) {
+                    width = maxWidth;
+                }
+                docEl.dataset.width = width;
+                docEl.dataset.percent = 100 * (width / remWidth);
+                docEl.style.fontSize = 100 * (width / remWidth) + 'px';
+            };
+            recalc();
+            if (!document.addEventListener) {
+                return;
+            } else {
+                window.addEventListener(resizeEvt, recalc, false);
+            }
+        })(document, window);
+    </script>
 </head>
 <body>
-    <div id="loading">
-        <canvas id="love-loading"></canvas>
+    <div class="loading-wrap" id="loading">
+        <div class="animal animal5"></div>
+        <div class="animal animal2"></div>
+        <div class="animal animal1"></div>
+        <div class="clouds-wrap"></div>
     </div>
     <div id="background">
         <canvas id="love-background"></canvas>
+    </div>
+    <div class="bgm-wrap">
+        <audio autoplay="autoplay">
+            <source src="./music/music.ogg" type="audio/ogg" />
+            <source src="./music/music.mp3" type="audio/mpeg" />
+        </audio>
     </div>
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/love.js"></script>
