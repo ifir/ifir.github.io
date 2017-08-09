@@ -14,7 +14,7 @@
             e.initEvent("touchstart", true, true);
             utils.$('#bgm')[0].dispatchEvent(e);
         }
-        utils.$('#bgm')[0].addEventListener('touchstart', function(){
+        window.addEventListener('touchstart', function(){
             utils.$('#bgm')[0].play();
         }, false);
 
