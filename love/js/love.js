@@ -20,10 +20,10 @@
             var timer = null;
             clearTimeout(timer);
             timer = setTimeout(function(){
-                utils.$('#bgm')[0].play();
+                
                 clearTimeout(timer);
             },2000);
         }
-
+    bgmAutoplay();
     }
 })(window, document);
