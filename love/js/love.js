@@ -7,4 +7,6 @@
         var WINDOW_WIDTH = w.innerWidth;
         var WINDOW_HEIGHT = w.innerHeight;
     }
+    //移动端不支持自动播放
+    utils.$('#bgm')[0].play();
 })(window, document);
