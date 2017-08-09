@@ -8,5 +8,22 @@
         var WINDOW_HEIGHT = w.innerHeight;
     }
     //移动端不支持自动播放
-    utils.$('#bgm')[0].play();
+    function bgmAutoplay(){
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
+            //微信
+            document.addEventListener("WeixinJSBridgeReady", function () {
+               utils.$('#bgm')[0].play();
+            }, false);
+        }else{
+            //通用
+            var timer = null;
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                utils.$('#bgm')[0].play();
+                clearTimeout(timer);
+            },2000);
+        }
+
+    }
 })(window, document);
