@@ -9,21 +9,15 @@
     }
     //移动端不支持自动播放
     function bgmAutoplay(){
-        var ua = window.navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
-            //微信
-            document.addEventListener("WeixinJSBridgeReady", function () {
-               utils.$('#bgm')[0].play();
-            }, false);
-        }else{
-            //通用
-            var timer = null;
-            clearTimeout(timer);
-            timer = setTimeout(function(){
-                
-                clearTimeout(timer);
-            },2000);
+        utils.$('#bgm')[0].onloadedmetadata = function(){
+            var e = document.createEvent("HTMLEvents");
+            e.initEvent("touchstart", true, true);
+            utils.$('#bgm')[0].dispatchEvent(e);
         }
-    bgmAutoplay();
+        utils.$('#bgm')[0].addEventListener('touchstart', function(){
+            utils.$('#bgm')[0].play();
+        }, false);
+
     }
+    bgmAutoplay();
 })(window, document);
