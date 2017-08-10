@@ -25,8 +25,8 @@ body {
     width: 100%;
     height: 100%;
     background: #b2f0ff;
-    background: -webkit-linear-gradient(250deg, #b2f0ff, #f2fbff);
-    background: linear-gradient(200deg, #b2f0ff, #f2fbff);
+    background: -webkit-linear-gradient(200deg, #69e2ff, #dcffe3);
+    background: linear-gradient(200deg, #69e2ff, #dcffe3);
     left: 0;
     top: 0;
     z-index: 9999;
@@ -35,13 +35,68 @@ body {
     display: block;
     position: absolute;
 }
-.loading-wrap .animal1{
-    width: 1.28rem;
-    height: 2.14rem;
-    background: url(../img/1.png) no-repeat 0 0;
-    background-size: 1.28rem 2.14rem;
+.loading-wrap .cloud{
+    display: block;
+    position: absolute;
+    left: -0.8rem;
+    top: 1.24rem;
+    width: 2.91rem;
+    height: 1.37rem;
+    background: url(../img/cloud.png) no-repeat 0 0;
+    background-size: 2.91rem 1.37rem;
+}
+.loading-wrap .bubble{
+    display: block;
+    position: absolute;
+    left: -.3rem;
+    top: .7rem;
+    width: .45rem;
+    height: .63rem;
+    background: url(../img/bubble.png) no-repeat 0 0;
+    background-size: .45rem .63rem;
+    -webkit-transform-origin:100% 100%;
+    transform-origin:100% 100%;
+    animation: bubble 2s infinite linear alternate;
+}
+.loading-wrap .sleep{
+    width: 3.05rem;
+    height: 4.26rem;
+    background: url(../img/sleep.png) no-repeat 0 0;
+    background-size: 3.05rem 4.26rem;
+    left: 50%;
+    top:50%;
+    margin-left: -1.52rem;
+    margin-top: -2.23rem;
+    z-index: 1;
+}
+.loading-wrap .wake{
+    display: none;
+    width: 2.57rem;
+    height: 4.29rem;
+    background: url(../img/wake.png) no-repeat 0 0;
+    background-size: 2.57rem 4.29rem;
     left: 50%;
     top:50%;
     margin-top: -1.07rem;
-    z-index: 1;
+    z-index: 2;
+}
+@-webkit-keyframes bubble{
+    0%{
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    100%{
+        -webkit-transform: scale3d(2, 2, 2);
+        transform: scale3d(2, 2, 2);
+    }
+}
+@keyframes bubble{
+    0%{
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    100%{
+        -webkit-transform: scale3d(2, 2, 2);
+        transform: scale3d(2, 2, 2);
+    }
 }
