@@ -13,4 +13,5 @@
         utils.$('#bgm')[0].play();
         d.documentElement.removeEventListener('touchstart', bgmAutoPlay);
     }
+    utils.$('#icon-fruit-icons-1').style.display = 'none';
 })(window, document);

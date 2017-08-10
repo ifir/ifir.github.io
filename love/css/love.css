@@ -15,7 +15,6 @@ body {
     overflow-scrolling: touch;
     background: #fff;
 }
-
 .audio {
     display: none;
 }
@@ -80,6 +79,15 @@ body {
     margin-top: -1.07rem;
     z-index: 2;
 }
+.loading-wrap .loading-text{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #ff9bb6;
+    z-index: 1;
+    font-size: 12px;
+    line-height: 12px;
+}
 @-webkit-keyframes bubble{
     0%{
         -webkit-transform: scale3d(1, 1, 1);
@@ -99,4 +107,79 @@ body {
         -webkit-transform: scale3d(2, 2, 2);
         transform: scale3d(2, 2, 2);
     }
+}
+/* food icon */
+.icon-food{
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background-image: url(../img/food.png);
+    background-repeat: no-repeat;
+    background-size: 4.8rem 7.2rem;
+}
+.icon-food-1{
+    background-position: 0 0;
+}
+.icon-food-2{
+    background-position: 0 -1.2rem;
+}
+.icon-food-3{
+    background-position: 0 -2.4rem;
+}
+.icon-food-4{
+    background-position: 0 -3.6rem;
+}
+.icon-food-5{
+    background-position: 0 -4.8rem;
+}
+.icon-food-6{
+    background-position: 0 -6rem;
+}
+.icon-food-7{
+    background-position: -1.2rem 0;
+}
+.icon-food-8{
+    background-position: -1.2rem -1.2rem;
+}
+.icon-food-9{
+    background-position: -1.2rem -2.4rem;
+}
+.icon-food-10{
+    background-position: -1.2rem -3.6rem;
+}
+.icon-food-11{
+    background-position: -1.2rem -4.8rem;
+}
+.icon-food-12{
+    background-position: -1.2rem -6rem;
+}
+.icon-food-13{
+    background-position: -2.4rem 0;
+}
+.icon-food-14{
+    background-position: -2.4rem -1.2rem;
+}
+.icon-food-15{
+    background-position: -2.4rem -2.4rem;
+}
+.icon-food-16{
+    background-position: -2.4rem -3.6rem;
+}
+.icon-food-17{
+    background-position: -2.4rem -4.8rem;
+}
+.icon-food-18{
+    background-position: -3.6rem 0;
+}
+.icon-food-19{
+    background-position: -3.6rem -1.2rem;
+}
+.icon-food-20{
+    background-position: -3.6rem -2.4rem;
+}
+.icon-food-21{
+    background-position: -3.6rem -3.6rem;
+}
+.icon-food-22{
+    background-position: -3.6rem -4.8rem;
 }
