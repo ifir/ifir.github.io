@@ -57,6 +57,17 @@ body {
     transform-origin:100% 100%;
     animation: bubble 2s infinite linear alternate;
 }
+.loading-wrap .bubble-fantasy{
+    display: block;
+    position: absolute;
+    left: 1.5rem;
+    top: -2.6rem;
+    width: 2.82rem;
+    height: 2.72rem;
+    background: url(../img/fantasy.png) no-repeat 0 0;
+    background-size: 2.82rem 2.72rem;
+    z-index: 5;
+}
 .loading-wrap .sleep{
     width: 3.05rem;
     height: 4.26rem;
@@ -116,6 +127,8 @@ body {
     background-image: url(../img/food.png);
     background-repeat: no-repeat;
     background-size: 4.8rem 7.2rem;
+    margin-top: .9rem;
+    margin-left: .9rem;
 }
 .icon-food-1{
     background-position: 0 0;
@@ -183,3 +196,4 @@ body {
 .icon-food-22{
     background-position: -3.6rem -4.8rem;
 }
+
