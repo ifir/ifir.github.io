@@ -2,7 +2,10 @@ html,
 body {
     height: 100%;
 }
-
+*{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 body {
     min-width: 300px;
     max-width: 640px;
@@ -15,11 +18,15 @@ body {
     overflow-scrolling: touch;
     background: #fff;
 }
+
 .audio {
     display: none;
 }
+
+
 /* loading */
-.loading-wrap{
+
+.loading-wrap {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -29,12 +36,20 @@ body {
     left: 0;
     top: 0;
     z-index: 9999;
+    -webkit-transition: 2s opacity ease;
+    transition: 2s opacity ease;
 }
-.loading-wrap .animal{
+
+.loaded {
+    opacity: 0;
+}
+
+.loading-wrap .animal {
     display: block;
     position: absolute;
 }
-.loading-wrap .cloud{
+
+.loading-wrap .cloud {
     display: block;
     position: absolute;
     left: -0.8rem;
@@ -44,7 +59,8 @@ body {
     background: url(../img/cloud.png) no-repeat 0 0;
     background-size: 2.91rem 1.37rem;
 }
-.loading-wrap .bubble{
+
+.loading-wrap .bubble {
     display: block;
     position: absolute;
     left: -.3rem;
@@ -53,11 +69,12 @@ body {
     height: .63rem;
     background: url(../img/bubble.png) no-repeat 0 0;
     background-size: .45rem .63rem;
-    -webkit-transform-origin:100% 100%;
-    transform-origin:100% 100%;
-    animation: bubble 2s linear infinite  alternate;
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    animation: bubble 2s linear infinite alternate;
 }
-.loading-wrap .bubble-fantasy{
+
+.loading-wrap .bubble-fantasy {
     display: block;
     position: absolute;
     left: 1.5rem;
@@ -77,34 +94,38 @@ body {
     -webkit-transform-origin: 60% 100%;
     transform-origin: 60% 100%;
 }
-.loading-wrap .bubble-fantasy-scale{
+
+.loading-wrap .bubble-fantasy-scale {
     opacity: 1;
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
 }
-.loading-wrap .sleep{
+
+.loading-wrap .sleep {
     width: 3.05rem;
     height: 4.26rem;
     background: url(../img/sleep.png) no-repeat 0 0;
     background-size: 3.05rem 4.26rem;
     left: 50%;
-    top:50%;
+    top: 50%;
     margin-left: -1.52rem;
     margin-top: -2.23rem;
     z-index: 1;
 }
-.loading-wrap .wake{
+
+.loading-wrap .wake {
     display: none;
     width: 2.57rem;
     height: 4.29rem;
     background: url(../img/wake.png) no-repeat 0 0;
     background-size: 2.57rem 4.29rem;
     left: 50%;
-    top:50%;
+    top: 50%;
     margin-top: -1.07rem;
     z-index: 2;
 }
-.loading-wrap .loading-text{
+
+.loading-wrap .loading-text {
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -113,70 +134,77 @@ body {
     font-size: 12px;
     line-height: 12px;
 }
-@-webkit-keyframes bubble{
-    0%{
+
+@-webkit-keyframes bubble {
+    0% {
         -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
     }
-    100%{
+    100% {
         -webkit-transform: scale3d(2, 2, 2);
         transform: scale3d(2, 2, 2);
     }
 }
-@keyframes bubble{
-    0%{
+
+@keyframes bubble {
+    0% {
         -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
     }
-    100%{
+    100% {
         -webkit-transform: scale3d(2, 2, 2);
         transform: scale3d(2, 2, 2);
     }
 }
-@-webkit-keyframes fantasy{
-    0%{
+
+@-webkit-keyframes fantasy {
+    0% {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
-    25%{
+    25% {
         -webkit-transform: translate3d(-.1rem, .1rem, 0);
     }
-    50%{
+    50% {
         -webkit-transform: translate3d(.1rem, .1rem, 0);
         transform: translate3d(.1rem, .1rem, 0);
     }
-    75%{
+    75% {
         -webkit-transform: translate3d(.1rem, .05rem, 0);
         transform: translate3d(.1rem, .05rem, 0);
     }
-    100%{
+    100% {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
 }
-@keyframes fantasy{
-    0%{
+
+@keyframes fantasy {
+    0% {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
-    25%{
+    25% {
         -webkit-transform: translate3d(-.1rem, .1rem, 0);
     }
-    50%{
+    50% {
         -webkit-transform: translate3d(.1rem, .1rem, 0);
         transform: translate3d(.1rem, .1rem, 0);
     }
-    75%{
+    75% {
         -webkit-transform: translate3d(.1rem, .05rem, 0);
         transform: translate3d(.1rem, .05rem, 0);
     }
-    100%{
+    100% {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
 }
+
+
 /* food icon */
-.icon-food{
+
+.icon-food {
     display: block;
     width: 1.2rem;
     height: 1.2rem;
@@ -186,70 +214,110 @@ body {
     margin-top: .9rem;
     margin-left: .9rem;
 }
-.icon-food-1{
+
+.icon-food-1 {
     background-position: 0 0;
 }
-.icon-food-2{
+
+.icon-food-2 {
     background-position: 0 -1.2rem;
 }
-.icon-food-3{
+
+.icon-food-3 {
     background-position: 0 -2.4rem;
 }
-.icon-food-4{
+
+.icon-food-4 {
     background-position: 0 -3.6rem;
 }
-.icon-food-5{
+
+.icon-food-5 {
     background-position: 0 -4.8rem;
 }
-.icon-food-6{
+
+.icon-food-6 {
     background-position: 0 -6rem;
 }
-.icon-food-7{
+
+.icon-food-7 {
     background-position: -1.2rem 0;
 }
-.icon-food-8{
+
+.icon-food-8 {
     background-position: -1.2rem -1.2rem;
 }
-.icon-food-9{
+
+.icon-food-9 {
     background-position: -1.2rem -2.4rem;
 }
-.icon-food-10{
+
+.icon-food-10 {
     background-position: -1.2rem -3.6rem;
 }
-.icon-food-11{
+
+.icon-food-11 {
     background-position: -1.2rem -4.8rem;
 }
-.icon-food-12{
+
+.icon-food-12 {
     background-position: -1.2rem -6rem;
 }
-.icon-food-13{
+
+.icon-food-13 {
     background-position: -2.4rem 0;
 }
-.icon-food-14{
+
+.icon-food-14 {
     background-position: -2.4rem -1.2rem;
 }
-.icon-food-15{
+
+.icon-food-15 {
     background-position: -2.4rem -2.4rem;
 }
-.icon-food-16{
+
+.icon-food-16 {
     background-position: -2.4rem -3.6rem;
 }
-.icon-food-17{
+
+.icon-food-17 {
     background-position: -2.4rem -4.8rem;
 }
-.icon-food-18{
+
+.icon-food-18 {
     background-position: -3.6rem 0;
 }
-.icon-food-19{
+
+.icon-food-19 {
     background-position: -3.6rem -1.2rem;
 }
-.icon-food-20{
+
+.icon-food-20 {
     background-position: -3.6rem -2.4rem;
 }
-.icon-food-21{
+
+.icon-food-21 {
     background-position: -3.6rem -3.6rem;
 }
-.icon-food-22{
+
+.icon-food-22 {
     background-position: -3.6rem -4.8rem;
+}
+
+
+
+/* 场景1 */
+.scene1{
+    width: 100%;
+    min-height: 100%;
+    background-image: url(../img/notebook.png);
+    background-size: 9rem 4.6rem;
+    padding: 0 .3rem;
+}
+.scene1 .notebook-p{
+    color: #5a5a5a;
+    font-size: .36rem;
+    line-height: .78rem;
+    text-indent: .72rem;
+    text-align: justify;
 }
 

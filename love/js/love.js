@@ -7,16 +7,26 @@
         var WINDOW_WIDTH = w.innerWidth;
         var WINDOW_HEIGHT = w.innerHeight;
 
-        var timer = null;
+        var timer = null, timer2 = null;
         //移动端不支持自动播放
         d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
         //水果切换
         utils.addClass(utils.$('.bubble-fantasy')[0], 'bubble-fantasy-scale');
         timer = w.setTimeout(function(){
-            var timer2 = null;
             timer2 = w.setInterval(randomFood, 300);
             clearTimeout(timer);
         }, 2000);
+        //资源加载完去掉loading
+        function sourceLoading(){
+            w.setTimeout(function(){
+                utils.addClass(utils.$('.loading-wrap')[0], 'loaded');
+                /*utils.remove(utils.$('.loading-wrap')[0]);
+                clearInterval(timer2);*/
+            }, 10000);
+        }
+        sourceLoading();
+
+
     }
     //bgm 播放
     function bgmAutoPlay(){
@@ -27,10 +37,10 @@
     function randomFood(){
         var food = utils.$('.icon-food')[0];
         var cls = food.className.split(' ')[1];
-        //防止随机出现两次一样的index
         var index = Math.floor(Math.random() * 20);
         if(cls){
             utils.removeClass(food, cls);
+            //防止随机出现两次一样的index
             var lastIndex = parseInt(cls.split('-')[2], 10);
             if(lastIndex === index){
                 if(lastIndex === 22){
