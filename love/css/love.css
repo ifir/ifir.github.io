@@ -55,7 +55,7 @@ body {
     background-size: .45rem .63rem;
     -webkit-transform-origin:100% 100%;
     transform-origin:100% 100%;
-    animation: bubble 2s infinite linear alternate;
+    animation: bubble 2s linear infinite  alternate;
 }
 .loading-wrap .bubble-fantasy{
     display: block;
@@ -67,6 +67,20 @@ body {
     background: url(../img/fantasy.png) no-repeat 0 0;
     background-size: 2.82rem 2.72rem;
     z-index: 5;
+    opacity: 0;
+    -webkit-animation: fantasy 2s linear 2s infinite;
+    animation: fantasy 2s linear 2s infinite;
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0, 0, 0);
+    -webkit-transition: 1.4s all ease;
+    transition: 1.4s all ease;
+    -webkit-transform-origin: 60% 100%;
+    transform-origin: 60% 100%;
+}
+.loading-wrap .bubble-fantasy-scale{
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
 }
 .loading-wrap .sleep{
     width: 3.05rem;
@@ -117,6 +131,48 @@ body {
     100%{
         -webkit-transform: scale3d(2, 2, 2);
         transform: scale3d(2, 2, 2);
+    }
+}
+@-webkit-keyframes fantasy{
+    0%{
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    25%{
+        -webkit-transform: translate3d(-.1rem, .1rem, 0);
+    }
+    50%{
+        -webkit-transform: translate3d(.1rem, .1rem, 0);
+        transform: translate3d(.1rem, .1rem, 0);
+    }
+    75%{
+        -webkit-transform: translate3d(.1rem, .05rem, 0);
+        transform: translate3d(.1rem, .05rem, 0);
+    }
+    100%{
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes fantasy{
+    0%{
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    25%{
+        -webkit-transform: translate3d(-.1rem, .1rem, 0);
+    }
+    50%{
+        -webkit-transform: translate3d(.1rem, .1rem, 0);
+        transform: translate3d(.1rem, .1rem, 0);
+    }
+    75%{
+        -webkit-transform: translate3d(.1rem, .05rem, 0);
+        transform: translate3d(.1rem, .05rem, 0);
+    }
+    100%{
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
 }
 /* food icon */

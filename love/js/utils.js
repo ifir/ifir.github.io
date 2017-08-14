@@ -28,3 +28,10 @@ utils.hasClass = function(ele, cls) {
 utils.remove = function(ele) {
     ele.parentNode.removeChild(ele);
 }
+utils.requestAnimationFrame = function(fn){
+    if(window.requestAnimationFrame){
+        window.requestAnimationFrame(fn);
+    }else{
+        window.setTimeout(fn, 1000 / 60);
+    }
+}
