@@ -367,13 +367,14 @@ body {
 }
 
 .envelope-wrap {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: relative;
 
     width: 6rem;
     height: 3rem;
-    margin: -1.5rem auto auto -3rem;
+    margin: 0 auto;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 
     -webkit-transition: transform 1.2s ease;
     transition: transform 1.2s ease;
@@ -385,8 +386,8 @@ body {
 }
 
 .envelope-wrap-turn {
-    -webkit-transform: rotate3d(0, 1, 0, -180deg);
-    transform: rotate3d(0, 1, 0, -180deg);
+    -webkit-transform: translateY(-50%) rotate3d(0, 1, 0, -180deg);
+    transform: translateY(-50%) rotate3d(0, 1, 0, -180deg);
 }
 
 .envelope-front .stamp {
