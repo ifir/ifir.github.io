@@ -325,7 +325,7 @@ body {
 .envelope-wrap{
     width: 6rem;
     height: 3rem;
-    background:transparent;
+    background: url(../img/envelope-bg.png) repeat 0 0;
     position: absolute;
     left: 50%;
     top: 50%;
