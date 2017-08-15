@@ -318,6 +318,8 @@ body {
     -webkit-perspective: 800px;
     perspective: 800px;
     position: relative;
+    -webkit-transform-style:preserve-3d;
+    transform-style:preserve-3d;
 }
 .envelope-wrap{
     width: 6rem;
@@ -327,9 +329,29 @@ body {
     left: 50%;
     top: 50%;
     margin: -1.5rem auto auto -3rem;
+    -webkit-transition: all 1.2s ease;
+    transition: all 1.2s ease;
+    -webkit-transform-style:preserve-3d;
+    transform-style:preserve-3d;
 }
-.envelope-wrap .envelope-front{
-    position: relative;
+.envelope-wrap-turn{
+    -webkit-transform: rotate3d(0, 1, 0, -180deg);
+    transform: rotate3d(0, 1, 0, -180deg);
+}
+.envelope-front .stamp{
+    position: absolute;
+    display: block;
+    width: 1.6rem;
+    height: 1.2rem;
+    top: .2rem;
+    right: .2rem;
+    background: url(../img/stamp.png) no-repeat 0 0;
+    background-size: 1.6rem 1.2rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.envelope-wrap .envelope-front, .envelope-wrap .envelope-back{
+    position: absolute;
     width: 6rem;
     height: 3rem;
     color: #837362;
@@ -337,17 +359,13 @@ body {
     background: url(../img/envelope-bg.png) repeat 0 0;
     box-shadow: inset 0 0 10px 1px rgba(255, 255, 255, 0.6), 0 2px 3px -2px rgba(0, 0, 0, 0.6);
     text-shadow: 0 1px 0 #fff, 0 1px 0 #fff;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
-.stamp{
-    position: absolute;
-    display: block;
-    width: 1.6rem;
-    height: 1.2rem;
-    right: .2rem;
-    top: .2rem;
-    z-index: 9;
-    background: url(../img/stamp.png) no-repeat 0 0;
-    background-size: 1.6rem 1.2rem;
+.envelope-wrap .envelope-back{
+    -webkit-transform: rotate3d(0, 1, 0, 180deg);
+    transform: rotate3d(0, 1, 0, 180deg);
+    background: purple;
 }
 .envelope-wrap h1{
     font-family: Satisfy, serif;

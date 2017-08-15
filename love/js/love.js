@@ -26,8 +26,15 @@
             }, 2000);
         }
         sourceLoading();
-
-
+        //信封翻转
+        utils.$('.envelope-wrap')[0].addEventListener('touchstart', function(){
+            var $this = this, cls = 'envelope-wrap-turn';
+            if(utils.hasClass($this, cls)){
+                utils.removeClass($this, cls);
+            }else{
+                utils.addClass($this, cls);
+            }
+        }, false);
     }
     //bgm 播放
     function bgmAutoPlay() {
