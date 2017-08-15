@@ -10,7 +10,7 @@
         var timer = null,
             timer2 = null;
         //移动端不支持自动播放
-        d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
+        //d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
         //水果切换
         utils.addClass(utils.$('.bubble-fantasy')[0], 'bubble-fantasy-scale');
         timer = w.setTimeout(function() {
