@@ -376,8 +376,6 @@ body {
     -webkit-transition: transform 1.2s ease;
     transition: transform 1.2s ease;
 
-    background: url(../img/envelope-bg.png) repeat 0 0;
-
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 
