@@ -362,19 +362,16 @@ body {
 
     -webkit-perspective: 800px;
     perspective: 800px;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
 }
 
 .envelope-wrap {
-    position: relative;
+    position: absolute;
 
     width: 6rem;
     height: 3rem;
-    margin: 0 auto;
+    margin: -1.5rem auto auto -3rem;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+    left: 50%;
 
     -webkit-transition: transform 1.2s ease;
     transition: transform 1.2s ease;
@@ -383,11 +380,14 @@ body {
 
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
 }
 
 .envelope-wrap-turn {
-    -webkit-transform: translateY(-50%) rotate3d(0, 1, 0, -180deg);
-    transform: translateY(-50%) rotate3d(0, 1, 0, -180deg);
+    -webkit-transform: rotate3d(0, 1, 0, -180deg);
+    transform: rotate3d(0, 1, 0, -180deg);
 }
 
 .envelope-front .stamp {
