@@ -341,13 +341,13 @@ body {
 .stamp{
     position: absolute;
     display: block;
-    width: 1.2rem;
-    height: .9rem;
+    width: 1.6rem;
+    height: 1.2rem;
     right: .2rem;
     top: .2rem;
     z-index: 9;
     background: url(../img/stamp.png) no-repeat 0 0;
-    background-size: 1.2rem .9rem;
+    background-size: 1.6rem 1.2rem;
 }
 .envelope-wrap h1{
     font-family: Satisfy, serif;
