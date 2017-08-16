@@ -381,7 +381,8 @@ body {
 .envelope-wrap {
     font-family: Satisfy, serif;
     font-weight: normal;
-
+    -webkit-user-select: none;
+    user-select: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -515,14 +516,14 @@ body {
 
     -webkit-perspective: 800px;
     perspective: 800px;
-    -webkit-transition: transform .6s ease;
-    transition: transform .6s ease;
 }
 .envelope-back .envelope-open .flip{
     -webkit-transform-origin: center bottom;
     transform-origin: center bottom;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    -webkit-transition: transform .6s ease;
+    transition: transform .6s ease;
 }
 .envelope-back .envelope-open .flip-turn{
     -webkit-transform: rotate3d(1, 0, 0, 180deg);
@@ -549,6 +550,21 @@ body {
     border:.36rem solid rgba(255, 255, 255, 0.1);
     background: #837362;
     box-shadow: none;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-transform: rotate3d(0, 1, 0, 180deg);
+    transform: rotate3d(0, 1, 0, 180deg);
+}
+.open-front{
+    text-align: center;
+}
+.open-front i{
+    font-size: .48rem;
+    color: #9b4849;
+    display: inline-block;
+    margin-top: .5rem;
+    -webkit-user-select: none;
+    user-select: none;
 }
 .envelope-back .envelope-backmask {
     z-index: 1;

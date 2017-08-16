@@ -27,13 +27,19 @@
         }
         sourceLoading();
         //信封翻转
-        utils.$('.envelope-wrap')[0].addEventListener('touchstart', function(){
-            var $this = this, cls = 'envelope-wrap-turn';
-            if(utils.hasClass($this, cls)){
+        utils.$('.envelope-front')[0].addEventListener('touchstart', function(){
+            var $this = utils.$('.envelope-wrap')[0], cls = 'envelope-wrap-turn';
+            utils.addClass($this, cls);
+            utils.$('.envelope-backmask')[0].addEventListener('touchstart', function(){
                 utils.removeClass($this, cls);
-            }else{
-                utils.addClass($this, cls);
-            }
+                utils.removeClass(utils.$('.flip')[0], 'flip-turn');
+            }, false);
+        }, false);
+        utils.$('.open-front')[0].addEventListener('touchstart', function(){
+            utils.addClass(utils.$('.flip')[0], 'flip-turn');
+        }, false);
+        utils.$('.open-back')[0].addEventListener('touchstart', function(){
+            utils.removeClass(utils.$('.flip')[0], 'flip-turn');
         }, false);
     }
     //bgm 播放
