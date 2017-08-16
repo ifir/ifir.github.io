@@ -509,7 +509,7 @@ body {
 
 .envelope-back .envelope-open {
     position: absolute;
-    z-index: 2;
+    z-index: 8;
 
     width: 100%;
     height: 1.5rem;
@@ -567,7 +567,7 @@ body {
     user-select: none;
 }
 .envelope-back .envelope-backmask {
-    z-index: 1;
+    z-index: 6;
     bottom: 0;
     left: 0;
 
@@ -575,10 +575,55 @@ body {
     height: 1.8rem;
 }
 
-
-
-
-
+.letter-wrap{
+    position: absolute;
+    width: 5.4rem;
+    height: 2rem;
+    left: .3rem;
+    top: .5rem;
+    z-index: 4;
+    -webkit-perspective: 800px;
+    perspective: 800px;
+    box-shadow: 3px 3px 2px rgba(165, 165, 165, 0.6);
+    //overflow: hidden;
+}
+.letter-wrap-fixed{
+    position: fixed;
+    z-index: 99!important;
+}
+.letter-wrap .letter-flip{
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: transform .6s ease;
+    transition: transform .6s ease;
+}
+.letter-flip .letter-paper{
+    width: 5.4rem;
+    height: 2rem;
+    background: url(../img/notebook.png) repeat 0 0;
+    background-size: 2rem 1rem;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.letter-flip-middle, .letter-flip-bottom{
+    -webkit-transform-origin: center top;
+    transform-origin: center top;
+    -webkit-transform: rotate3d(1, 0, 0, -180deg);
+    transform: rotate3d(1, 0, 0, -180deg);
+}
+.open-letter .letter-flip-middle{
+    -webkit-transform: rotate3d(1, 0, 0, 0);
+    transform: rotate3d(1, 0, 0, 0);
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.open-letter .letter-flip-bottom{
+    -webkit-transform: rotate3d(1, 0, 0, 0);
+    transform: rotate3d(1, 0, 0, 0);
+    -webkit-transition-delay: .4s;
+    transition-delay: .4s;
+}
 /* 场景2 */
 
 .scene2 {

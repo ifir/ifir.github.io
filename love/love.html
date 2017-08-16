@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="envelope-back">
-                <div id="open" class="envelope-open">
+                <div class="envelope-open">
                     <div class="flip">
                         <div class="open-front">
                             <i>open</i>
@@ -73,14 +73,29 @@
                         <div class="open-back"></div>
                     </div>
                 </div>
-                <div id="letter" class="letter"></div>
+                <div id="letter" class="letter-wrap">
+                    <div class="letter-flip">
+                        <div class="letter-paper letter-top">
+                            <p class="notebook-p">上</p>
+                        </div>
+                    </div>
+                    <div class="letter-flip letter-flip-middle">
+                        <div class="letter-paper letter-middle">
+                            <p class="notebook-p">中</p>
+                        </div>
+                    </div>
+                    <div class="letter-flip letter-flip-bottom">
+                        <div class="letter-paper letter-bottom">
+                            <p class="notebook-p">下</p>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="envelope-backmask"></div>
             </div>
         </div>
     </div>
-    <div class="scene2">
-        <p class="notebook-p">你好打萨达是大所大所多</p>
-    </div>
+    
     <!-- BGM -->
     <audio class="audio" id="bgm" loop="loop" controls="controls">
         <source src="./music/music.ogg" type="audio/ogg" />
