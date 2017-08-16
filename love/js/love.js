@@ -33,6 +33,7 @@
             utils.$('.envelope-backmask')[0].addEventListener('touchstart', function(){
                 utils.removeClass($this, cls);
                 utils.removeClass(utils.$('.flip')[0], 'flip-turn');
+                utils.$('.envelope-open')[0].style.zIndex = '8';
             }, false);
         }, false);
         utils.$('.open-front')[0].addEventListener('touchstart', function(){
@@ -42,57 +43,29 @@
             }, 400);
         }, false);
         utils.$('.open-back')[0].addEventListener('touchstart', function(){
+            utils.$('.envelope-open')[0].style.zIndex = '8';
             utils.removeClass(utils.$('.flip')[0], 'flip-turn');
         }, false);
         //打开信
-        d.getElementById('letter').addEventListener('touchstart', openLetter, false);
+        var letter = d.getElementById('letter');
+        letter.addEventListener('touchstart', openLetter, false);
         function openLetter(){
-            d.getElementById('letter').style.top = '-2.5rem';
+            letter.style.top = '-2.5rem';
             w.setTimeout(function(){
-                utils.addClass(d.getElementById('letter'), 'open-letter');
+                utils.addClass(letter, 'open-letter');
+                w.setTimeout(function(){
+                    letter.addEventListener('touchstart', readLetter, false);
+                }, 1000);
             }, 1000);
+            letter.removeEventListener('touchstart', openLetter, false);
         }
-        /*(function(){
-            var isTouch = false, startX = 0, startY = 0, offsetX = 0, offsetY = 0;
-            var letter = d.getElementById('letter');
-            letter.addEventListener('touchstart', function(e){
-                startX = e.touches[0].pageX;
-                startY = e.touches[0].pageY;
-                isTouch = true;
-                var letterTop = d.getElementById('letter').getBoundingClientRect().top;
-                var envelopeTop = utils.$('.envelope-wrap')[0].getBoundingClientRect().top;
-                d.getElementById('letter').style.top =  letterTop - envelopeTop + 'px';
-                console.log(e)
-                //utils.addClass(letter, 'letter-wrap-fixed');
-            }, false);
-            letter.addEventListener('touchmove', function(e){
-                if(isTouch){
-                    var moveX = e.touches[0].pageX;
-                    var moveY = e.touches[0].pageY;
-                    offsetX = startX - moveX;
-                    offsetY = startY - moveY;
-                    //信底部距离封信里面有多少
-                    var letterTop = d.getElementById('letter').getBoundingClientRect().top;
-                    var letterLeft = d.getElementById('letter').getBoundingClientRect().left;
-                    var letterBottom = d.getElementById('letter').getBoundingClientRect().bottom;
-                    var backmaskBottom = utils.$('.envelope-backmask')[0].getBoundingClientRect().top;
-                    var envelopeTop = utils.$('.envelope-wrap')[0].getBoundingClientRect().top;
-                    if(letterBottom < backmaskBottom){
-                        utils.addClass(letter, 'letter-wrap-fixed');
-                        d.getElementById('letter').style.left =  - offsetX + 'px';
-                        d.getElementById('letter').style.top = - offsetY + 'px';
-                    }else{
-                        console.log(offsetY - (letterTop - envelopeTop) + (startX - letterTop))
-                        d.getElementById('letter').style.top = offsetX - letterTop - envelopeTop - startX - letterTop + 'px';
-                    }
-                }else{
-                    return;
-                }
-            }, false);
-            letter.addEventListener('touchend', function(){
-                isTouch = false;
-            }, false);
-        })();*/
+        function readLetter(){
+            utils.addClass(utils.$('.scene1')[0], 'scene-hide');
+            w.setTimeout(function(){
+                utils.remove(utils.$('.scene1')[0]);
+            }, 1200)
+        }
+
     }
     //bgm 播放
     function bgmAutoPlay() {
