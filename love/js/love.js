@@ -44,8 +44,15 @@
         utils.$('.open-back')[0].addEventListener('touchstart', function(){
             utils.removeClass(utils.$('.flip')[0], 'flip-turn');
         }, false);
-        //拖动信
-        (function(){
+        //打开信
+        d.getElementById('letter').addEventListener('touchstart', openLetter, false);
+        function openLetter(){
+            d.getElementById('letter').style.top = '-2.5rem';
+            w.setTimeout(function(){
+                utils.addClass(d.getElementById('letter'), 'open-letter');
+            }, 1000);
+        }
+        /*(function(){
             var isTouch = false, startX = 0, startY = 0, offsetX = 0, offsetY = 0;
             var letter = d.getElementById('letter');
             letter.addEventListener('touchstart', function(e){
@@ -85,7 +92,7 @@
             letter.addEventListener('touchend', function(){
                 isTouch = false;
             }, false);
-        })();
+        })();*/
     }
     //bgm 播放
     function bgmAutoPlay() {
