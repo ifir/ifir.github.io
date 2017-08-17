@@ -627,7 +627,7 @@ body {
     left: .3rem;
 
     width: 5.4rem;
-    height: 2rem;
+    //height: 2rem;
 
     -webkit-transition: all 1s ease;
     transition: all 1s ease;
@@ -706,7 +706,7 @@ body {
 .open-letter {
     z-index: 10;
 
-    height: auto;
+    //height: auto;
     overflow: visible;
 }
 
