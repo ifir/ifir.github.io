@@ -655,7 +655,7 @@ body {
 
     background: url(../img/notebook.png) repeat 0 0;
     background-size: 2rem 1rem;
-    box-shadow: 2px 2px 2px rgba(165, 165, 165, .6);
+    /* box-shadow: 2px 2px 2px rgba(165, 165, 165, .6); */
 
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
