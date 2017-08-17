@@ -627,7 +627,7 @@ body {
     left: .3rem;
 
     width: 5.4rem;
-    //height: 2rem;
+    height: 2rem;
 
     -webkit-transition: all 1s ease;
     transition: all 1s ease;
@@ -655,7 +655,7 @@ body {
 
     background: url(../img/notebook.png) repeat 0 0;
     background-size: 2rem 1rem;
-    /* box-shadow: 2px 2px 2px rgba(165, 165, 165, .6); */
+    box-shadow: 2px 2px 2px rgba(165, 165, 165, .6);
 
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -706,7 +706,7 @@ body {
 .open-letter {
     z-index: 10;
 
-    //height: auto;
+    height: auto;
     overflow: visible;
 }
 
