@@ -38,6 +38,7 @@
         }, false);
         utils.$('.open-front')[0].addEventListener('touchstart', function(){
             utils.addClass(utils.$('.flip')[0], 'flip-turn');
+            utils.addClass(d.getElementById('letter'), 'letter-wrap-animate');
             w.setTimeout(function(){
                 utils.$('.envelope-open')[0].style.zIndex = '3';
             }, 400);
@@ -45,6 +46,7 @@
         utils.$('.open-back')[0].addEventListener('touchstart', function(){
             utils.$('.envelope-open')[0].style.zIndex = '8';
             utils.removeClass(utils.$('.flip')[0], 'flip-turn');
+            utils.removeClass(d.getElementById('letter'), 'letter-wrap-animate');
         }, false);
         //打开信
         var letter = d.getElementById('letter');

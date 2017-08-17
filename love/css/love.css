@@ -526,9 +526,9 @@ body {
     z-index: 2;
 }
 
-.envelope-wrap-turn .letter-wrap {
-    -webkit-animation: letter .6s linear 1.8s;
-    animation: letter .6s linear 1.8s;
+.envelope-wrap-turn .letter-wrap-animate{
+    -webkit-animation: letter .6s linear .8s;
+    animation: letter .6s linear .8s;
 }
 
 .envelope-wrap .envelope-back {
@@ -634,6 +634,8 @@ body {
 
     -webkit-perspective: 800px;
     perspective: 800px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .letter-wrap .letter-flip {
