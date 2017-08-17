@@ -636,6 +636,7 @@ body {
     perspective: 800px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    overflow: hidden;
 }
 
 .letter-wrap .letter-flip {
@@ -706,6 +707,7 @@ body {
     z-index: 10;
 
     height: auto;
+    overflow: visible;
 }
 
 .open-letter .see-detail {
