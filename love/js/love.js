@@ -64,14 +64,34 @@
         function readLetter(){
             utils.addClass(utils.$('.scene1')[0], 'scene-hide');
             w.setTimeout(function(){
+                utils.$('.music-control')[0].style.top = '-.8rem';
                 utils.remove(utils.$('.scene1')[0]);
             }, 1200)
         }
 
+        //音乐按钮播放控制
+        utils.$('.music-control')[0].addEventListener('touchstart', function(){
+            if(utils.hasClass(this, 'music-close')){
+                utils.$('#bgm')[0].play();
+                utils.removeClass(this, 'music-close');
+            }else{
+                utils.$('#bgm')[0].pause();
+                utils.addClass(this, 'music-close');
+            }
+            //透明度控制
+            utils.removeClass(utils.$('.music-control')[0], 'delayOpacity');
+            w.setTimeout(function(){
+                utils.addClass(utils.$('.music-control')[0], 'delayOpacity');
+            }, 2000);
+        }, false);
+        w.setTimeout(function(){
+            utils.addClass(utils.$('.music-control')[0], 'delayOpacity');
+        }, 2000);
     }
     //bgm 播放
     function bgmAutoPlay() {
         utils.$('#bgm')[0].play();
+        utils.removeClass(utils.$('.music-control')[0], 'music-close');
         d.documentElement.removeEventListener('touchstart', bgmAutoPlay);
     }
     //loading动画中水果随机切换
