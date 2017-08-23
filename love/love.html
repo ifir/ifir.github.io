@@ -39,7 +39,7 @@
 </head>
 <body>
     <!-- loading -->
-    <div class="loading-wrap" id="loading" style="display: none;">
+    <div class="loading-wrap" id="loading">
         <div class="animal sleep">
             <i class="cloud"></i>
             <i class="bubble"></i>
@@ -52,7 +52,7 @@
         </div>
     </div>
     <!-- 信封 -->
-    <div class="scene1">
+    <div class="scene1" style="display: none;">
         <div class="envelope-wrap">
             <div class="envelope-front">
                 <i class="stamp">
@@ -101,7 +101,7 @@
     </div>
     <div class="scene2" style="display: none;">
         <p class="notebook-p">Date：2017.8.28<span class="weather">Weather：<i class="sunny"></i></span></p>
-        <p class="notebook-p">dasd</p>
+        <p class="notebook-p" id="qx">观看七夕动画</p>
     </div>
     <div class="scene3" style="display: none;">
         <div class="moon">
@@ -116,7 +116,7 @@
 
     </div>
     <!-- BGM -->
-    <div class="music-control music-close" style="display:none;"></div>
+    <div class="music-control music-close"></div>
     <audio class="audio" id="bgm" loop="loop" controls="controls">
         <source src="http://sta.ganjistatic1.com/html/test/other/music/music.ogg" type="audio/ogg" />
         <source src="http://sta.ganjistatic1.com/html/test/other/music/music.mp3" type="audio/mpeg" />
