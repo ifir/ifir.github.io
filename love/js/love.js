@@ -7,24 +7,24 @@
         //预加载
         (function(){
             var imgUrl = [
-                'http://sta.ganjistatic1.com/html/test/other/img/memphis-colorful.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/envelope-bg.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/postmark.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/stamp.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/magnifier.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/fingerprint.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/notebook.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/qx-text.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/boy.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/girl.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/bridge.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/cloud6.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/cloud7.png',
-                'http://sta.ganjistatic1.com/html/test/other/img/cloud8.png'
+                'memphis-colorful.png',
+                'envelope-bg.png',
+                'postmark.png',
+                'stamp.png',
+                'magnifier.png',
+                'fingerprint.png',
+                'notebook.png',
+                'qx-text.png',
+                'boy.png',
+                'girl.png',
+                'bridge.png',
+                'cloud6.png',
+                'cloud7.png',
+                'cloud8.png'
             ];
             var successNum = 0;
             for(var i = 0, len = imgUrl.length; i < len; i++){
-                var src = imgUrl[i];
+                var src = 'http://sta.ganjistatic1.com/html/test/other/img/' + imgUrl[i];
                 var img = new Image();
                 //图片加载成功
                 img.addEventListener('load', function(){
@@ -60,7 +60,7 @@
             var timer = null,
                 timer2 = null;
             //移动端不支持自动播放
-            d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
+            //d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
             //水果切换
             utils.addClass(utils.$('.bubble-fantasy')[0], 'bubble-fantasy-scale');
             timer = w.setTimeout(function() {

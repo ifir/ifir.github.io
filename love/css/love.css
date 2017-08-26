@@ -208,8 +208,8 @@ body {
 }
 
 .loading-wrap .loading-text {
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 28px;
+    line-height: 28px;
 
     position: absolute;
     z-index: 1;
@@ -451,7 +451,12 @@ body {
 
     color: #9b4849;
 }
-
+.envelope-front h1 b{
+    display: inline-block;
+    width: .3rem;
+    height: .1rem;
+    vertical-align: middle;
+}
 .envelope-front .stamp {
     position: absolute;
     z-index: 1;
