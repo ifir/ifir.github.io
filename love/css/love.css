@@ -446,17 +446,29 @@ body {
 .envelope-front h1 {
     font-size: .44rem;
 
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     margin-left: .8rem;
 
     color: #9b4849;
 }
-.envelope-front h1 b{
+
+.envelope-front h1 b {
     display: inline-block;
     width: .3rem;
     height: .1rem;
     vertical-align: middle;
 }
+
+.envelope-front p {
+    font-size: .36rem;
+    line-height: .36rem;
+    color: #9b4849;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: .2rem;
+    word-spacing: .2rem;
+}
+
 .envelope-front .stamp {
     position: absolute;
     z-index: 1;
@@ -1278,4 +1290,67 @@ body {
 
     background: url(http://sta.ganjistatic1.com/html/test/other/img/cloud6.png) no-repeat 0 0;
     background-size: 100% 100%;
+}
+
+.css-heart {
+    display: inline-block;
+    position: relative;
+    width: .3rem;
+    height: .3rem;
+    vertical-align: top;
+    margin: .2rem .06rem 0 .16rem;
+    -webkit-animation: heart 1.2s linear infinite alternate;
+    animation: heart 1.2s linear infinite alternate;
+}
+
+.css-heart:before,
+.css-heart:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    width: .2rem;
+    height: .3rem;
+    background: #ff6666;
+    border-radius: .3rem .3rem 0 0;
+}
+
+.css-heart:before {
+    left: .1rem;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.css-heart:after {
+    left: -.1rem;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}
+@-webkit-keyframes heart {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1.2, 1.2, 1.2);
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+}
+@keyframes heart {
+    0% {
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    100% {
+        -webkit-transform: scale3d(1.2, 1.2, 1.2);
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+}
+.css-kiss{
+    display: inline-block;
+    width: .4rem;
+    height: .78rem;
 }

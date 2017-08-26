@@ -3,9 +3,14 @@
     w.addEventListener('load', ready, false);
     //初始化
     function ready() {
-        init();
+        //常量
+        var WINDOW_WIDTH = w.innerWidth,
+            WINDOW_HEIGHT = w.innerHeight;
+
+        var timer = null,
+            timer2 = null;
         //预加载
-        (function(){
+        (function() {
             var imgUrl = [
                 'memphis-colorful.png',
                 'envelope-bg.png',
@@ -23,42 +28,39 @@
                 'cloud8.png'
             ];
             var successNum = 0;
-            for(var i = 0, len = imgUrl.length; i < len; i++){
+            for (var i = 0, len = imgUrl.length; i < len; i++) {
                 var src = 'http://sta.ganjistatic1.com/html/test/other/img/' + imgUrl[i];
                 var img = new Image();
                 //图片加载成功
-                img.addEventListener('load', function(){
+                img.addEventListener('load', function() {
                     successNum++;
                     //全部缓存完成
-                    if(successNum === len){
+                    if (successNum === len) {
                         sourceLoading(3000);
                     }
                 }, false);
                 //图片加载失败
-                img.addEventListener('error', function(){
+                img.addEventListener('error', function() {
                     sourceLoading(5000);
                 }, false);
                 //发起请求
                 img.src = src;
             }
         })();
+        init();
         //资源加载完去掉loading
         function sourceLoading(time) {
             w.setTimeout(function() {
                 utils.addClass(utils.$('.loading-wrap')[0], 'loaded');
                 utils.$('.scene1')[0].style.display = 'block';
+                clearTimeout(timer2);
                 w.setTimeout(function() {
                     utils.remove(utils.$('.loading-wrap')[0]);
                 }, 1200);
             }, time);
         }
-        function init(){
-            //常量
-            var WINDOW_WIDTH = w.innerWidth,
-                WINDOW_HEIGHT = w.innerHeight;
 
-            var timer = null,
-                timer2 = null;
+        function init() {
             //移动端不支持自动播放
             //d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
             //水果切换
@@ -68,23 +70,24 @@
                 clearTimeout(timer);
             }, 2000);
             //信封翻转
-            utils.$('.envelope-front')[0].addEventListener('touchstart', function(){
-                var $this = utils.$('.envelope-wrap')[0], cls = 'envelope-wrap-turn';
+            utils.$('.envelope-front')[0].addEventListener('touchstart', function() {
+                var $this = utils.$('.envelope-wrap')[0],
+                    cls = 'envelope-wrap-turn';
                 utils.addClass($this, cls);
-                utils.$('.envelope-backmask')[0].addEventListener('touchstart', function(){
+                utils.$('.envelope-backmask')[0].addEventListener('touchstart', function() {
                     utils.removeClass($this, cls);
                     utils.removeClass(utils.$('.flip')[0], 'flip-turn');
                     utils.$('.envelope-open')[0].style.zIndex = '8';
                 }, false);
             }, false);
-            utils.$('.open-front')[0].addEventListener('touchstart', function(){
+            utils.$('.open-front')[0].addEventListener('touchstart', function() {
                 utils.addClass(utils.$('.flip')[0], 'flip-turn');
                 utils.addClass(d.getElementById('letter'), 'letter-wrap-animate');
-                w.setTimeout(function(){
+                w.setTimeout(function() {
                     utils.$('.envelope-open')[0].style.zIndex = '3';
                 }, 400);
             }, false);
-            utils.$('.open-back')[0].addEventListener('touchstart', function(){
+            utils.$('.open-back')[0].addEventListener('touchstart', function() {
                 utils.$('.envelope-open')[0].style.zIndex = '8';
                 utils.removeClass(utils.$('.flip')[0], 'flip-turn');
                 utils.removeClass(d.getElementById('letter'), 'letter-wrap-animate');
@@ -92,48 +95,69 @@
             //打开信
             var letter = d.getElementById('letter');
             letter.addEventListener('touchstart', openLetter, false);
-            function openLetter(){
+
+            function openLetter() {
                 letter.style.top = '-2.5rem';
-                w.setTimeout(function(){
+                w.setTimeout(function() {
                     utils.addClass(letter, 'open-letter');
-                    w.setTimeout(function(){
+                    w.setTimeout(function() {
                         letter.addEventListener('touchstart', readLetter, false);
                     }, 1000);
                 }, 1000);
                 letter.removeEventListener('touchstart', openLetter, false);
             }
-            function readLetter(){
+
+            function readLetter() {
                 utils.addClass(utils.$('.scene1')[0], 'scene-hide');
                 utils.$('.scene2')[0].style.display = 'block';
-                w.setTimeout(function(){
+                w.setTimeout(function() {
                     utils.$('.music-control')[0].style.top = '-.8rem';
 
                     utils.remove(utils.$('.scene1')[0]);
                 }, 1200)
             }
             //观看七夕动画
-            utils.$('#qx')[0].addEventListener('touchstart', function(){
+            utils.$('#qx')[0].addEventListener('touchstart', function() {
                 utils.$('.scene3')[0].style.display = 'block';
                 utils.remove(utils.$('.scene2')[0]);
             }, false);
             //音乐按钮播放控制
-            utils.$('.music-control')[0].addEventListener('touchstart', function(){
-                if(utils.hasClass(this, 'music-close')){
+            utils.$('.music-control')[0].addEventListener('touchstart', function() {
+                if (utils.hasClass(this, 'music-close')) {
                     utils.$('#bgm')[0].play();
                     utils.removeClass(this, 'music-close');
-                }else{
+                } else {
                     utils.$('#bgm')[0].pause();
                     utils.addClass(this, 'music-close');
                 }
                 //透明度控制
                 utils.removeClass(utils.$('.music-control')[0], 'delayOpacity');
-                w.setTimeout(function(){
+                w.setTimeout(function() {
                     utils.addClass(utils.$('.music-control')[0], 'delayOpacity');
                 }, 2000);
             }, false);
-            w.setTimeout(function(){
+            w.setTimeout(function() {
                 utils.addClass(utils.$('.music-control')[0], 'delayOpacity');
             }, 2000);
+            //ajax请求信封内容
+            (function() {
+                //判断url
+                var url = w.location.search.substr(1).split('=');
+                if (url[0] === 'love' && url[1] === 'manli') {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('get', 'https://ifir.github.io/love/text/text.json', true);
+                    xhr.send(null);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            var data = JSON.parse(xhr.responseText);
+                            utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
+                            console.log(data);
+                        }
+                    }
+                } else {
+                    utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Friend';
+                }
+            })();
         }
     }
     //bgm 播放
