@@ -62,7 +62,7 @@
 
         function init() {
             //移动端不支持自动播放
-            //d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
+            d.documentElement.addEventListener('touchstart', bgmAutoPlay, false);
             //水果切换
             utils.addClass(utils.$('.bubble-fantasy')[0], 'bubble-fantasy-scale');
             timer = w.setTimeout(function() {
@@ -82,18 +82,16 @@
                             var data = JSON.parse(xhr.responseText);
                             //信封正面
                             utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
+                            utils.$('.postcodes')[0].innerHTML = '<span>5</span><span>2</span><span>0</span>';
                             //信的内容
                             var tpl = [];
                             for( var key in data){
                                 tpl.push("<p class='notebook-p'>" + data[key] + "</p>");
                             }
-                            tpl.push("<p class='notebook-p' id='qx'>观看七夕动画<i class='css-movie'></i></p>");
+                            tpl.push("<p class='notebook-p' id='qx'>观看七夕小动画<i class='css-movie'></i></p>");
                             utils.$('.scene2')[0].innerHTML = tpl.join('');
                         }
                     }
-                } else {
-                    //信封正面
-                    utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Friend';
                 }
             })();
             //信封翻转
@@ -150,7 +148,11 @@
             //观看七夕动画
             utils.$('#qx')[0].addEventListener('touchstart', function() {
                 utils.$('.scene3')[0].style.display = 'block';
+                utils.$('.music-control')[0].style.top = '10px';
                 utils.remove(utils.$('.scene2')[0]);
+                w.setTimeout(function(){
+                    utils.addClass(utils.$('.scene3')[0], 'scale');
+                }, 10000);
             }, false);
             //音乐按钮播放控制
             utils.$('.music-control')[0].addEventListener('touchstart', function() {
@@ -170,7 +172,6 @@
             w.setTimeout(function() {
                 utils.addClass(utils.$('.music-control')[0], 'delayOpacity');
             }, 2000);
-            
         }
     }
     //bgm 播放
