@@ -49,8 +49,7 @@ body {
     width: .8rem;
     height: .8rem;
 
-    -webkit-animation: musicCtrl 5s linear infinite;
-    animation: musicCtrl 5s linear infinite;
+    
 
     opacity: 1;
     background: url(http://sta.ganjistatic1.com/html/test/other/img/note.png) no-repeat 0 0;
@@ -64,12 +63,12 @@ body {
     opacity: .4;
 }
 
-.music-close {
-    -webkit-animation: none;
-    animation: none;
+.music-open {
+    -webkit-animation: musicCtrl 5s linear infinite;
+    animation: musicCtrl 5s linear infinite;
 }
 
-.music-close::after {
+.music-control::after {
     display: block;
 
     width: .8rem;
@@ -82,7 +81,9 @@ body {
 
     background: #828282;
 }
-
+.music-open::after{
+    display: none;
+}
 @-webkit-keyframes musicCtrl {
     0% {
         -webkit-transform: rotate3d(0, 0, 1, 0);

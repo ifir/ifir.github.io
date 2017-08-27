@@ -3,9 +3,6 @@
     w.addEventListener('load', ready, false);
     //初始化
     function ready() {
-        //常量
-        var WINDOW_WIDTH = w.innerWidth,
-            WINDOW_HEIGHT = w.innerHeight;
 
         var timer = null,
             timer2 = null;
@@ -36,12 +33,12 @@
                     successNum++;
                     //全部缓存完成
                     if (successNum === len) {
-                        sourceLoading(3000);
+                        sourceLoading(5000);
                     }
                 }, false);
                 //图片加载失败
                 img.addEventListener('error', function() {
-                    sourceLoading(5000);
+                    sourceLoading(8000);
                 }, false);
                 //发起请求
                 img.src = src;
@@ -159,12 +156,12 @@
             }
             //音乐按钮播放控制
             utils.$('.music-control')[0].addEventListener('touchstart', function() {
-                if (utils.hasClass(this, 'music-close')) {
-                    utils.$('#bgm')[0].play();
-                    utils.removeClass(this, 'music-close');
-                } else {
+                if (utils.hasClass(this, 'music-open')) {
                     utils.$('#bgm')[0].pause();
-                    utils.addClass(this, 'music-close');
+                    utils.removeClass(this, 'music-open');
+                } else {
+                    utils.$('#bgm')[0].play();
+                    utils.addClass(this, 'music-open');
                 }
                 //透明度控制
                 utils.removeClass(utils.$('.music-control')[0], 'delayOpacity');
@@ -180,7 +177,7 @@
     //bgm 播放
     function bgmAutoPlay() {
         utils.$('#bgm')[0].play();
-        utils.removeClass(utils.$('.music-control')[0], 'music-close');
+        utils.addClass(utils.$('.music-control')[0], 'music-open');
         d.documentElement.removeEventListener('touchstart', bgmAutoPlay);
     }
     //loading动画中水果随机切换
