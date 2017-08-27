@@ -49,8 +49,6 @@ body {
     width: .8rem;
     height: .8rem;
 
-    
-
     opacity: 1;
     background: url(http://sta.ganjistatic1.com/html/test/other/img/note.png) no-repeat 0 0;
     background-size: .8rem .8rem;
@@ -1248,7 +1246,7 @@ body {
     right: 50%;
 
     width: 1.54rem;
-    height: 1.94rem;
+    height: 1.96rem;
 
     -webkit-transform: translate3d(6rem, 0, 0) rotate3d(0, 0, 1, 45deg);
     transform: translate3d(6rem, 0, 0) rotate3d(0, 0, 1, 45deg);
@@ -1441,6 +1439,7 @@ body {
     height: .92rem;
     margin-top: -.14rem;
     margin-left: .1rem;
+    margin-right: .1rem;
 
     vertical-align: top;
 
