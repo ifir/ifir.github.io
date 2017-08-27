@@ -69,6 +69,33 @@
                 timer2 = w.setInterval(randomFood, 300);
                 clearTimeout(timer);
             }, 2000);
+            //ajax请求信封内容
+            (function() {
+                //判断url
+                var url = w.location.search.substr(1).split('=');
+                if (url[0] === 'love' && url[1] === 'manli') {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('get', 'https://ifir.github.io/love/text/text.json', true);
+                    xhr.send(null);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            var data = JSON.parse(xhr.responseText);
+                            //信封正面
+                            utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
+                            //信的内容
+                            var tpl = [];
+                            for( var key in data){
+                                tpl.push("<p class='notebook-p'>" + data[key] + "</p>");
+                            }
+                            tpl.push("<p class='notebook-p' id='qx'>观看七夕动画<i class='css-movie'></i></p>");
+                            utils.$('.scene2')[0].innerHTML = tpl.join('');
+                        }
+                    }
+                } else {
+                    //信封正面
+                    utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Friend';
+                }
+            })();
             //信封翻转
             utils.$('.envelope-front')[0].addEventListener('touchstart', function() {
                 utils.addClass(utils.$('.envelope-wrap')[0], 'envelope-wrap-turn');
@@ -143,33 +170,7 @@
             w.setTimeout(function() {
                 utils.addClass(utils.$('.music-control')[0], 'delayOpacity');
             }, 2000);
-            //ajax请求信封内容
-            (function() {
-                //判断url
-                var url = w.location.search.substr(1).split('=');
-                if (url[0] === 'love' && url[1] === 'manli') {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('get', 'https://ifir.github.io/love/text/text.json', true);
-                    xhr.send(null);
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            var data = JSON.parse(xhr.responseText);
-                            //信封正面
-                            utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
-                            //信的内容
-                            var tpl = [];
-                            for( var key in data){
-                                tpl.push("<p class='notebook-p'>" + data[key] + "</p>");
-                            }
-                            tpl.push("<p class='notebook-p' id='qx'>观看七夕动画<i class='css-movie'></i></p>");
-                            utils.$('.scene2')[0].innerHTML = tpl.join('');
-                        }
-                    }
-                } else {
-                    //信封正面
-                    utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Friend';
-                }
-            })();
+            
         }
     }
     //bgm 播放

@@ -1413,11 +1413,148 @@ body {
     border-bottom: .1rem solid transparent;
     border-left: .16rem solid #f66;
 }
-.qx-text{
+
+.qx-text {
     display: inline-block;
+
     width: .4rem;
     height: .92rem;
+    margin-top: -.14rem;
+    margin-left: .1rem;
+
+    vertical-align: top;
+
     background: url(http://sta.ganjistatic1.com/html/test/other/img/qx-text.png) no-repeat 0 0;
     background-size: cover;
+}
+
+.css-letter {
+    position: relative;
+
+    display: inline-block;
+
+    width: .6rem;
+    height: .4rem;
+    margin-top: .14rem;
+    margin-left: .1rem;
+
     vertical-align: top;
+
+    border-radius: .08rem;
+    background: #fff;
+}
+
+.css-letter::before,
+.css-letter::after {
+    position: absolute;
+    left: 0;
+
+    content: '';
+
+    border-right: .3rem solid transparent;
+    border-left: .3rem solid transparent;
+}
+
+.css-letter::before {
+    z-index: 2;
+    top: 1px;
+
+    border-top: .3rem solid #fff;
+}
+
+.css-letter::after {
+    z-index: 1;
+    top: 2px;
+
+    border-top: .3rem solid #ccc;
+}
+
+
+.gift {
+    position: relative;
+
+    display: inline-block;
+
+    width: .6rem;
+    height: .4rem;
+    margin-top: .2rem;
+
+    vertical-align: top;
+
+    border-radius: 0 0 .08rem .08rem;
+    background: #fcbe64;
+}
+
+.gift::before {
+    position: absolute;
+    z-index: 20;
+    top: -.05rem;
+    left: -.05rem;
+
+    display: block;
+
+    width: .7rem;
+    height: .2rem;
+
+    content: '';
+
+    background: #fbb54f;
+    /* Old browsers */
+}
+
+.gift::after {
+    position: absolute;
+    z-index: 30;
+    bottom: 0;
+    left: 50%;
+
+    display: block;
+
+    width: .14rem;
+    height: .45rem;
+    margin-left: -.07rem;
+
+    content: '';
+
+    background: #fba152;
+}
+
+.ribbons::after {
+    position: absolute;
+    z-index: 5;
+    top: -.22rem;
+    right: 0;
+
+    display: inline-block;
+
+    width: .14rem;
+    height: .2rem;
+
+    content: '';
+    -webkit-transform: rotate(40deg);
+    transform: rotate(40deg);
+
+    border: 2px solid #f66;
+    border-radius: .2rem;
+    background: transparent;
+}
+
+.ribbons::before {
+    position: absolute;
+    z-index: 5;
+    top: -.22rem;
+    left: 0rem;
+
+    display: inline-block;
+
+    width: .3rem;
+    height: .12rem;
+
+    content: '';
+    -webkit-transform: rotate(-130deg);
+    transform: rotate(-130deg);
+
+    border: 2px solid #f66;
+    border-radius: .1rem;
+    background: transparent;
 }
