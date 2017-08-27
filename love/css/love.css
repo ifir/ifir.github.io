@@ -454,19 +454,24 @@ body {
 
 .envelope-front h1 b {
     display: inline-block;
+
     width: .3rem;
     height: .1rem;
+
     vertical-align: middle;
 }
 
 .envelope-front p {
     font-size: .36rem;
-    line-height: .36rem;
-    color: #9b4849;
     font-weight: bolder;
-    text-align: center;
+    line-height: .36rem;
+
     margin-top: .2rem;
+
+    text-align: center;
     word-spacing: .2rem;
+
+    color: #9b4849;
 }
 
 .envelope-front .stamp {
@@ -802,6 +807,18 @@ body {
     transition-delay: .4s;
     -webkit-transform: rotate3d(1, 0, 0, 0);
     transform: rotate3d(1, 0, 0, 0);
+}
+
+.letter-mask {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: transparent;
 }
 
 @-webkit-keyframes letter {
@@ -1293,42 +1310,51 @@ body {
 }
 
 .css-heart {
-    display: inline-block;
     position: relative;
+
+    display: inline-block;
+
     width: .3rem;
     height: .3rem;
-    vertical-align: top;
     margin: .2rem .06rem 0 .16rem;
+
     -webkit-animation: heart 1.2s linear infinite alternate;
     animation: heart 1.2s linear infinite alternate;
+    vertical-align: top;
 }
 
-.css-heart:before,
-.css-heart:after {
+.css-heart::before,
+.css-heart::after {
     position: absolute;
-    content: '';
     top: 0;
+
     width: .2rem;
     height: .3rem;
-    background: #ff6666;
+
+    content: '';
+
     border-radius: .3rem .3rem 0 0;
+    background: #f66;
 }
 
-.css-heart:before {
+.css-heart::before {
     left: .1rem;
+
     -webkit-transform: rotate(-45deg);
     transform: rotate(-45deg);
     -webkit-transform-origin: 0 100%;
     transform-origin: 0 100%;
 }
 
-.css-heart:after {
+.css-heart::after {
     left: -.1rem;
+
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     -webkit-transform-origin: 100% 100%;
     transform-origin: 100% 100%;
 }
+
 @-webkit-keyframes heart {
     0% {
         -webkit-transform: scale3d(1, 1, 1);
@@ -1339,6 +1365,7 @@ body {
         transform: scale3d(1.2, 1.2, 1.2);
     }
 }
+
 @keyframes heart {
     0% {
         -webkit-transform: scale3d(1, 1, 1);
@@ -1349,8 +1376,48 @@ body {
         transform: scale3d(1.2, 1.2, 1.2);
     }
 }
-.css-kiss{
+
+.css-kiss {
     display: inline-block;
+
     width: .4rem;
     height: .78rem;
+}
+
+.css-movie {
+    position: relative;
+
+    display: inline-block;
+
+    width: .4rem;
+    height: .4rem;
+    margin-top: .14rem;
+    margin-left: .04rem;
+
+    vertical-align: top;
+
+    border: 1px solid #f66;
+    border-radius: 50%;
+}
+
+.css-movie::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    content: '';
+    -webkit-transform: translate3d(-40%, -50%, 0);
+    transform: translate3d(-40%, -50%, 0);
+
+    border-top: .1rem solid transparent;
+    border-bottom: .1rem solid transparent;
+    border-left: .16rem solid #f66;
+}
+.qx-text{
+    display: inline-block;
+    width: .4rem;
+    height: .92rem;
+    background: url(http://sta.ganjistatic1.com/html/test/other/img/qx-text.png) no-repeat 0 0;
+    background-size: cover;
+    vertical-align: top;
 }

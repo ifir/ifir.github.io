@@ -71,33 +71,37 @@
             }, 2000);
             //信封翻转
             utils.$('.envelope-front')[0].addEventListener('touchstart', function() {
-                var $this = utils.$('.envelope-wrap')[0],
-                    cls = 'envelope-wrap-turn';
-                utils.addClass($this, cls);
-                utils.$('.envelope-backmask')[0].addEventListener('touchstart', function() {
-                    utils.removeClass($this, cls);
-                    utils.removeClass(utils.$('.flip')[0], 'flip-turn');
-                    utils.$('.envelope-open')[0].style.zIndex = '8';
-                }, false);
+                utils.addClass(utils.$('.envelope-wrap')[0], 'envelope-wrap-turn');
+                utils.$('.envelope-backmask')[0].addEventListener('touchstart', backmask, false);
             }, false);
-            utils.$('.open-front')[0].addEventListener('touchstart', function() {
+            function backmask() {
+                utils.removeClass(utils.$('.envelope-wrap')[0], 'envelope-wrap-turn');
+                utils.removeClass(utils.$('.flip')[0], 'flip-turn');
+                utils.$('.envelope-open')[0].style.zIndex = '8';
+            }
+            utils.$('.open-front')[0].addEventListener('touchstart', openfront, false);
+            function openfront() {
                 utils.addClass(utils.$('.flip')[0], 'flip-turn');
                 utils.addClass(d.getElementById('letter'), 'letter-wrap-animate');
                 w.setTimeout(function() {
                     utils.$('.envelope-open')[0].style.zIndex = '3';
                 }, 400);
-            }, false);
-            utils.$('.open-back')[0].addEventListener('touchstart', function() {
+            }
+            utils.$('.open-back')[0].addEventListener('touchstart', openback, false);
+            function openback() {
                 utils.$('.envelope-open')[0].style.zIndex = '8';
                 utils.removeClass(utils.$('.flip')[0], 'flip-turn');
                 utils.removeClass(d.getElementById('letter'), 'letter-wrap-animate');
-            }, false);
+            }
             //打开信
             var letter = d.getElementById('letter');
             letter.addEventListener('touchstart', openLetter, false);
 
             function openLetter() {
                 letter.style.top = '-2.5rem';
+                utils.$('.open-front')[0].removeEventListener('touchstart', openfront, false);
+                utils.$('.open-back')[0].removeEventListener('touchstart', openback, false);
+                utils.$('.envelope-backmask')[0].removeEventListener('touchstart', backmask, false);
                 w.setTimeout(function() {
                     utils.addClass(letter, 'open-letter');
                     w.setTimeout(function() {
@@ -150,11 +154,19 @@
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === 4 && xhr.status === 200) {
                             var data = JSON.parse(xhr.responseText);
+                            //信封正面
                             utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
-                            console.log(data);
+                            //信的内容
+                            var tpl = [];
+                            for( var key in data){
+                                tpl.push("<p class='notebook-p'>" + data[key] + "</p>");
+                            }
+                            tpl.push("<p class='notebook-p' id='qx'>观看七夕动画<i class='css-movie'></i></p>");
+                            utils.$('.scene2')[0].innerHTML = tpl.join('');
                         }
                     }
                 } else {
+                    //信封正面
                     utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Friend';
                 }
             })();
