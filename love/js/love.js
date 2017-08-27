@@ -74,15 +74,15 @@
                 //判断url
                 var url = w.location.search.substr(1).split('=');
                 if (url[0] === 'love' && url[1] === 'manli') {
+                    //信封正面
+                    utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
+                    utils.$('.postcodes')[0].innerHTML = '<span>5</span><span>2</span><span>0</span>';
                     var xhr = new XMLHttpRequest();
                     xhr.open('get', 'https://ifir.github.io/love/text/text.json', true);
                     xhr.send(null);
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState === 4 && xhr.status === 200) {
                             var data = JSON.parse(xhr.responseText);
-                            //信封正面
-                            utils.$('.envelope-front h1')[0].innerHTML = 'Dear<b></b>Manli';
-                            utils.$('.postcodes')[0].innerHTML = '<span>5</span><span>2</span><span>0</span>';
                             //信的内容
                             var tpl = [];
                             for( var key in data){
@@ -90,6 +90,8 @@
                             }
                             tpl.push("<p class='notebook-p' id='qx'>观看七夕小动画<i class='css-movie'></i></p>");
                             utils.$('.scene2')[0].innerHTML = tpl.join('');
+                            //观看七夕动画
+                            utils.$('#qx')[0].addEventListener('touchstart', playQXAnimation, false);
                         }
                     }
                 }
@@ -146,14 +148,15 @@
                 }, 1200)
             }
             //观看七夕动画
-            utils.$('#qx')[0].addEventListener('touchstart', function() {
+            utils.$('#qx')[0].addEventListener('touchstart', playQXAnimation, false);
+            function playQXAnimation() {
                 utils.$('.scene3')[0].style.display = 'block';
                 utils.$('.music-control')[0].style.top = '10px';
                 utils.remove(utils.$('.scene2')[0]);
                 w.setTimeout(function(){
                     utils.addClass(utils.$('.scene3')[0], 'scale');
                 }, 10000);
-            }, false);
+            }
             //音乐按钮播放控制
             utils.$('.music-control')[0].addEventListener('touchstart', function() {
                 if (utils.hasClass(this, 'music-close')) {
