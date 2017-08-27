@@ -186,3 +186,5 @@
         utils.addClass(food, 'icon-food-' + index);
     }
 })(window, document);
+
+
