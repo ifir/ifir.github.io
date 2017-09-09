@@ -71,6 +71,7 @@
                         imgNum++;
                         imgObj[key] = this;
                         if(imgNum === 5){
+                          console.log(1);
                             var bird = new Bird();
                             loop();
                             function loop(){
@@ -81,11 +82,9 @@
                                     rAFId = w.requestAnimationFrame(loop);
                                 }else{
                                     destroy();
-                                    console.log(1)
                                 }
-                                //console.log(rAFId)
                             }
-                            d.addEventListener('touchstart', function(){
+                            cvs.addEventListener('touchstart', function(){
                                 bird.speed = -10;
                             }, false);
                         }
@@ -142,7 +141,7 @@
                 startScene = null;
                 w.cancelAnimationFrame(rAFId);
                 clean();
-                
+
             }
         }*/
         //bg
@@ -168,7 +167,7 @@
                 var _this = this;
                 var index = _this.wing ? 0 : 1;
                 _this.Y += _this.speed;
-                _this.speed += 0.4;
+                _this.speed += 1;
                 //临界条件
                 //坠地死亡
                 if(_this.Y >= (1176 * W_HEIGHT / 1334 - 30)){
@@ -178,26 +177,26 @@
                 }
                 //顶端不能越界
                 if(_this.Y <= 0){
+                    _this.Y = 0;
                     _this.speed = 3;
+                }
+                if(_this.speed >= 10){
+                    _this.speed = 10;
                 }
                 //小鸟的头部方向
                 //设置中心点
-                //ctx.translate(W_WIDTH / 2, W_HEIGHT / 2);
-                //ctx.translate(-W_WIDTH / 2, -W_HEIGHT / 2);
-                /*if(_this.speed > 0){
+                ctx.translate(_this.X, _this.Y);
+                if(_this.speed > 0){
                     //旋转30deg
-                    ctx.rotate(Math.PI / 6);
+                    ctx.rotate(30 * Math.PI / 180);
                 }else if(_this.speed < 0){
-                    ctx.rotate(-Math.PI / 6);
+                    ctx.rotate(-30 * Math.PI / 180);
                 }else{
                     ctx.rotate(0);
-                }*/
-                //挥动翅膀
-                _this.count++;
-                if(this.count === 10){
-                    _this.wing = !_this.wing;
-                    _this.count = 0;
                 }
+                ctx.translate(-_this.X,- _this.Y);
+                //挥动翅膀
+                console.log(_this.speed)
                 ctx.drawImage(imgObj['bird'+ index], _this.X, _this.Y);
                 ctx.restore();
             }
