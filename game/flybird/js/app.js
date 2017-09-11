@@ -172,7 +172,22 @@
         }*/
         //碰撞检测
         function check(){
-
+            var birdRect = {
+                top: bird.Y,
+                left: bird.X,
+                right: bird.X + imgObj.bird0.width,
+                bottom: bird.Y + imgObj.bird0.height
+            };
+            for(var i = 0, len = pipes.length; i < len; i++){
+                var ps = pipes[i];
+                //可通过的中间的区域
+                var pipeRect = {
+                    top: ps.Y,
+                    left: ,
+                    right: ,
+                    bottom:
+                };
+            }
         }
         //bg
         function bg(){
@@ -224,7 +239,7 @@
                 }else{
                     ctx.rotate(0);
                 }
-                ctx.translate(-_this.X,- _this.Y);
+                ctx.translate(-_this.X, -_this.Y);
                 //挥动翅膀
                 ctx.drawImage(imgObj['bird'+ index], _this.X, _this.Y);
                 ctx.restore();
@@ -238,44 +253,52 @@
             _this.pipeX = W_WIDTH;
             _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 60));//上管道Y
             _this.dpipeY = _this.upipeY + _this.distance + 60;//下管道Y
+            _this.alive = true;
         }
         Pipe.prototype = {
             constructor: Pipe,
             draw: function(){
                 var _this = this;
-                //上水管
-                ctx.drawImage(imgObj.upipe, _this.pipeX, _this.upipeY);
-                //上水管管体
-                (function(){
-                    for(var i = 0, len = _this.upipeY / 3; i < len; i++){
-                        ctx.drawImage(imgObj.umod, _this.pipeX, i * 3);
+                if(_this.alive){
+                    //上水管
+                    ctx.drawImage(imgObj.upipe, _this.pipeX, _this.upipeY);
+                    //上水管管体
+                    (function(){
+                        for(var i = 0, len = _this.upipeY / 3; i < len; i++){
+                            ctx.drawImage(imgObj.umod, _this.pipeX, i * 3);
+                        }
+                    })();
+                    //下水管
+                    ctx.drawImage(imgObj.dpipe, _this.pipeX, _this.dpipeY);
+                    //下水管管体
+                    (function(){
+                        for(var i = 0, len = (_this.viewH - (_this.dpipeY + 60)) / 2; i < len; i++){
+                            ctx.drawImage(imgObj.dmod, _this.pipeX, _this.dpipeY + 60 + i * 2);
+                        }
+                    })();
+                    if(_this.pipeX <= -62){
+                        _this.alive = false;
                     }
-                })();
-                //下水管
-                ctx.drawImage(imgObj.dpipe, _this.pipeX, _this.dpipeY);
-                //下水管管体
-                (function(){
-                    for(var i = 0, len = (_this.viewH - (_this.dpipeY + 60)) / 2; i < len; i++){
-                        ctx.drawImage(imgObj.dmod, _this.pipeX, _this.dpipeY + 60 + i * 2);
-                    }
-                })();
-                _this.pipeX -= 2;
+                    _this.pipeX -= 2;
+                }
+
             },
         }
         function creatPipe(){
             var pipe = new Pipe();
             if(pipes.length >= 4){
                 pipes.shift();
-                pipes.push(pipe);
-            }else{
-                pipes.push(pipe);
             }
-            console.log(pipes)
+            pipes.push(pipe);
         }
         //销毁
         function destroy(){
             w.cancelAnimationFrame(rAFId);
             //clean();
+        }
+        //重新开始
+        function restart(){
+
         }
         //清除画布
         function clean() {
