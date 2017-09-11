@@ -50,6 +50,11 @@
         var ctx = cvs.getContext('2d');
         cvs.width = W_WIDTH;
         cvs.height = W_HEIGHT;
+        var bird = null; //小鸟
+        var pipes = []; //管道
+        var index = 0; //管道index
+        var lastTime = Date.now();
+        var detailTime = 0;
         //图片对象存储
         var imgData = {
                 'bg': 'bg.jpg',
@@ -57,7 +62,11 @@
                 'bird0': 'bird0.png',
                 'bird1': 'bird1.png',
                 'start': 'start.jpg',
-                'grass': 'grass.jpg'
+                'grass': 'grass.jpg',
+                'upipe': 'up_pipe.png',
+                'dpipe': 'down_pipe.png',
+                'umod': 'up_mod.png',
+                'dmod': 'down_mod.png'
             },
             imgObj = {};
         //图像对象缓存
@@ -70,23 +79,39 @@
                     img.addEventListener('load', function() {
                         imgNum++;
                         imgObj[key] = this;
-                        if(imgNum === 5){
-                          console.log(1);
-                            var bird = new Bird();
-                            bg();
+                        if(imgNum === 10){
+                            var move = 0;
+                            bird = new Bird();
                             loop();
                             function loop(){
+                                var nowTime = Date.now();
+                                detailTime = nowTime - lastTime;
+                                lastTime = nowTime;
                                 if(bird.alive){
+                                    move += 2;
                                     ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
-                                    //bg();
+                                    //绘制水管
+                                    if(pipes.length <= 0){
+                                        creatPipe();
+                                    }
+                                    if(move > 182){
+                                        move = 0;
+                                        creatPipe();
+                                    }
+                                    //画水管
+                                    for(var i = 0, len = pipes.length; i < len; i++){
+                                        pipes[i].draw();
+                                    }
                                     bird.draw();
                                     rAFId = w.requestAnimationFrame(loop);
                                 }else{
                                     destroy();
                                 }
+                                
                             }
+                            
                             cvs.addEventListener('touchstart', function(){
-                                bird.speed = -10;
+                                bird.speed = -6;
                             }, false);
                         }
                     }, false);
@@ -145,6 +170,10 @@
 
             }
         }*/
+        //碰撞检测
+        function check(){
+
+        }
         //bg
         function bg(){
             ctx.rect(0, 0, W_WIDTH, W_HEIGHT);
@@ -168,7 +197,7 @@
                 var _this = this;
                 var index = _this.wing ? 0 : 1;
                 _this.Y += _this.speed;
-                _this.speed += 0.4;
+                _this.speed = _this.speed + 0.02 * detailTime;
                 //临界条件
                 //坠地死亡
                 if(_this.Y >= (1176 * W_HEIGHT / 1334 - 30)){
@@ -200,6 +229,48 @@
                 ctx.drawImage(imgObj['bird'+ index], _this.X, _this.Y);
                 ctx.restore();
             }
+        }
+        //管道
+        function Pipe(){
+            var _this = this;
+            _this.viewH = 1176 * W_HEIGHT / 1334; //管道出现的高度区域
+            _this.distance = 124; //上下管道距离
+            _this.pipeX = W_WIDTH;
+            _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 60));//上管道Y
+            _this.dpipeY = _this.upipeY + _this.distance + 60;//下管道Y
+        }
+        Pipe.prototype = {
+            constructor: Pipe,
+            draw: function(){
+                var _this = this;
+                //上水管
+                ctx.drawImage(imgObj.upipe, _this.pipeX, _this.upipeY);
+                //上水管管体
+                (function(){
+                    for(var i = 0, len = _this.upipeY / 3; i < len; i++){
+                        ctx.drawImage(imgObj.umod, _this.pipeX, i * 3);
+                    }
+                })();
+                //下水管
+                ctx.drawImage(imgObj.dpipe, _this.pipeX, _this.dpipeY);
+                //下水管管体
+                (function(){
+                    for(var i = 0, len = (_this.viewH - (_this.dpipeY + 60)) / 2; i < len; i++){
+                        ctx.drawImage(imgObj.dmod, _this.pipeX, _this.dpipeY + 60 + i * 2);
+                    }
+                })();
+                _this.pipeX -= 2;
+            },
+        }
+        function creatPipe(){
+            var pipe = new Pipe();
+            if(pipes.length >= 4){
+                pipes.shift();
+                pipes.push(pipe);
+            }else{
+                pipes.push(pipe);
+            }
+            console.log(pipes)
         }
         //销毁
         function destroy(){
