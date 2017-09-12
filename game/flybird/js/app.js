@@ -52,9 +52,9 @@
         cvs.height = W_HEIGHT;
         var bird = null; //小鸟
         var pipes = []; //管道
-        var index = 0; //管道index
-        var lastTime = Date.now();
+        var lastTime = 0;
         var detailTime = 0;
+        var move = 0;
         //图片对象存储
         var imgData = {
                 'bg': 'bg.jpg',
@@ -69,6 +69,15 @@
                 'dmod': 'down_mod.png'
             },
             imgObj = {};
+        //初始化
+        function init(){
+            bird = new Bird();
+            pipes = [];
+            move = 0;
+            lastTime = Date.now();
+            detailTime = 0;
+            rAFId = null;
+        }
         //图像对象缓存
         (function() {
             var imgNum = 0;
@@ -80,45 +89,48 @@
                         imgNum++;
                         imgObj[key] = this;
                         if(imgNum === 10){
-                            var move = 0;
-                            bird = new Bird();
+                            init();
                             loop();
-                            function loop(){
-                                var nowTime = Date.now();
-                                detailTime = nowTime - lastTime;
-                                lastTime = nowTime;
-                                if(bird.alive){
-                                    move += 2;
-                                    ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
-                                    //绘制水管
-                                    if(pipes.length <= 0){
-                                        creatPipe();
-                                    }
-                                    if(move > 182){
-                                        move = 0;
-                                        creatPipe();
-                                    }
-                                    //画水管
-                                    for(var i = 0, len = pipes.length; i < len; i++){
-                                        pipes[i].draw();
-                                    }
-                                    bird.draw();
-                                    rAFId = w.requestAnimationFrame(loop);
-                                }else{
-                                    destroy();
-                                }
-                                
-                            }
-                            
-                            cvs.addEventListener('touchstart', function(){
-                                bird.speed = -6;
-                            }, false);
                         }
                     }, false);
                 })(key);
             }
         })();
 
+        function loop(){
+            var nowTime = Date.now();
+            detailTime = nowTime - lastTime;
+            lastTime = nowTime;
+            if(bird.alive){
+                move += 2;
+                ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
+                check();
+                //绘制水管
+                if(pipes.length <= 0){
+                    creatPipe();
+                }
+                if(move > 182){
+                    move = 0;
+                    creatPipe();
+                }
+                //画水管
+                for(var i = 0, len = pipes.length; i < len; i++){
+                    pipes[i].draw();
+                }
+                bird.draw();
+                rAFId = w.requestAnimationFrame(loop);
+            }else{
+                check();
+                destroy();
+                restart();
+                
+            }
+        }
+        
+        cvs.addEventListener('touchstart', fly, false);
+        function fly(){
+            bird.speed = -6;
+        }
         /*function startScene() {
             //绘制背景
             var shake = true,
@@ -167,26 +179,63 @@
                 startScene = null;
                 w.cancelAnimationFrame(rAFId);
                 clean();
-
+                
             }
         }*/
+        
         //碰撞检测
         function check(){
             var birdRect = {
-                top: bird.Y,
+                top: bird.Y ,
                 left: bird.X,
                 right: bird.X + imgObj.bird0.width,
                 bottom: bird.Y + imgObj.bird0.height
             };
+            //临界条件
+            //坠地死亡
+            if(birdRect.bottom >= (1176 * W_HEIGHT / 1334) ){
+                bird.alive = false;
+            }
+            //顶端不能越界
+            if(birdRect.top <= 0){
+                bird.speed = 3;
+            }
+            //水管检测
             for(var i = 0, len = pipes.length; i < len; i++){
-                var ps = pipes[i];
-                //可通过的中间的区域
+                var pipe = pipes[i];
                 var pipeRect = {
-                    top: ps.Y,
-                    left: ,
-                    right: ,
-                    bottom:
+                    top: pipe.upipeY + imgObj.upipe.height, //上水管宽口距离顶部距离
+                    left: pipe.pipeX,
+                    right: pipe.pipeX + imgObj.upipe.width,
+                    bottom: pipe.dpipeY//下水管宽口距离顶部距离
                 };
+                if(birdRect.right >= pipeRect.left && birdRect.left <= pipeRect.right){
+                    if(birdRect.top <= pipeRect.top || birdRect.bottom >= pipeRect.bottom){
+                        bird.alive = false;
+                    }
+                }
+                //小鸟轮廓辅助线
+                ctx.beginPath();
+                ctx.moveTo(birdRect.right, 0);
+                ctx.lineTo(birdRect.right, W_HEIGHT);
+                ctx.strokeStyle = 'red';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(birdRect.left, 0);
+                ctx.lineTo(birdRect.left, W_HEIGHT);
+                ctx.strokeStyle = 'blue';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(0, birdRect.top);
+                ctx.lineTo(W_WIDTH, birdRect.top);
+                ctx.strokeStyle = 'black';
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(0, birdRect.bottom);
+                ctx.lineTo(W_WIDTH, birdRect.bottom);
+                ctx.strokeStyle = 'green';
+                ctx.stroke();
+
             }
         }
         //bg
@@ -213,24 +262,12 @@
                 var index = _this.wing ? 0 : 1;
                 _this.Y += _this.speed;
                 _this.speed = _this.speed + 0.02 * detailTime;
-                //临界条件
-                //坠地死亡
-                if(_this.Y >= (1176 * W_HEIGHT / 1334 - 30)){
-                    _this.speed = 0;
-                    _this.alive = false;
-                    //_this.Y = 1176 * W_HEIGHT / 1334 - 30;
-                }
-                //顶端不能越界
-                if(_this.Y <= 0){
-                    _this.Y = 0;
-                    _this.speed = 3;
-                }
-                if(_this.speed >= 10){
-                    _this.speed = 10;
+                if(bird.speed >= 10){
+                    bird.speed = 10;
                 }
                 //小鸟的头部方向
                 //设置中心点
-                ctx.translate(_this.X, _this.Y);
+                ctx.translate(_this.X + (imgObj.bird0.width / 2), _this.Y + (imgObj.bird0.height / 2));
                 if(_this.speed > 0){
                     //旋转30deg
                     ctx.rotate(30 * Math.PI / 180);
@@ -239,7 +276,7 @@
                 }else{
                     ctx.rotate(0);
                 }
-                ctx.translate(-_this.X, -_this.Y);
+                ctx.translate(-_this.X - (imgObj.bird0.width / 2), -_this.Y - (imgObj.bird0.height / 2));
                 //挥动翅膀
                 ctx.drawImage(imgObj['bird'+ index], _this.X, _this.Y);
                 ctx.restore();
@@ -251,7 +288,7 @@
             _this.viewH = 1176 * W_HEIGHT / 1334; //管道出现的高度区域
             _this.distance = 124; //上下管道距离
             _this.pipeX = W_WIDTH;
-            _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 60));//上管道Y
+            _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 120));//上管道Y
             _this.dpipeY = _this.upipeY + _this.distance + 60;//下管道Y
             _this.alive = true;
         }
@@ -293,12 +330,27 @@
         }
         //销毁
         function destroy(){
+            bird = null;
+            pipes = [];
             w.cancelAnimationFrame(rAFId);
+            cvs.removeEventListener('touchstart', fly, false);
             //clean();
         }
         //重新开始
         function restart(){
+            ctx.drawImage(imgObj.start, (W_WIDTH / 2 - imgObj.start.width / 2), (W_HEIGHT / 2 - imgObj.start.height / 2), imgObj.start.width, imgObj.start.height);
+            cvs.addEventListener('touchstart', restartGame, false);
 
+            function restartGame(e) {
+                var X = e.touches[0].pageX,
+                    Y = e.touches[0].pageY;
+                if ((X >= (W_WIDTH / 2 - imgObj.start.width / 2) && X <= ((W_WIDTH / 2 - imgObj.start.width / 2) + imgObj.start.width)) && (Y >= (W_HEIGHT / 2 - imgObj.start.height / 2) && Y <= (W_HEIGHT / 2 - imgObj.start.height / 2) + imgObj.start.height)) {
+                    cvs.removeEventListener('touchstart', restartGame, false);
+                    cvs.addEventListener('touchstart', fly, false);
+                    init();
+                    loop();
+                }
+            }
         }
         //清除画布
         function clean() {
