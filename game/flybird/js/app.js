@@ -51,8 +51,11 @@
         cvs.width = W_WIDTH;
         cvs.height = W_HEIGHT;
         var bird = null; //小鸟
-        var score = null;//分数
+        var score = null; //分数
         var pipes = []; //管道
+        var storage = null;
+        var bestScore = 0;
+        var grassSpeed = 0;
         var lastTime = 0;
         var detailTime = 0;
         var move = 0;
@@ -67,18 +70,27 @@
                 'upipe': 'up_pipe.png',
                 'dpipe': 'down_pipe.png',
                 'umod': 'up_mod.png',
-                'dmod': 'down_mod.png'
+                'dmod': 'down_mod.png',
+                'msg': 'message.jpg'
             },
             imgObj = {};
         //初始化
-        function init(){
+        function init() {
             bird = new Bird();
             score = new Score();
+            storage = new Storage('localStorage')
             pipes = [];
             move = 0;
+            grassSpeed = 0;
             lastTime = Date.now();
             detailTime = 0;
             rAFId = null;
+            //读取最高分数
+            if (storage.get('fbs')) {
+                bestScore = storage.get('fbs');
+            } else {
+                storage.set('fbs', 0);
+            }
         }
         //图像对象缓存
         (function() {
@@ -90,55 +102,22 @@
                     img.addEventListener('load', function() {
                         imgNum++;
                         imgObj[key] = this;
-                        if(imgNum === 10){
-                            init();
-                            loop();
+                        if (imgNum === 11) {
+
+                            var s = startScene();
+                            s();
                         }
                     }, false);
                 })(key);
             }
         })();
-
-        function loop(){
-            var nowTime = Date.now();
-            detailTime = nowTime - lastTime;
-            lastTime = nowTime;
-            check();
-            if(bird.alive){
-                ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
-                move += 2;
-                //绘制水管
-                if(pipes.length <= 0){
-                    creatPipe();
-                }
-                if(move > 182){
-                    move = 0;
-                    creatPipe();
-                }
-                //画水管
-                for(var i = 0, len = pipes.length; i < len; i++){
-                    pipes[i].draw();
-                }
-                score.draw();
-                bird.draw();
-                rAFId = w.requestAnimationFrame(loop);
-            }else{
-                destroy();
-                restart();
-            }
-        }
-        //小鸟向上飞
-        cvs.addEventListener('touchstart', fly, false);
-        function fly(){
-            bird.speed = -6;
-        }
-        /*function startScene() {
+        //开始界面
+        function startScene() {
             //绘制背景
             var shake = true,
                 shakeY = 100,
                 startTime = Date.now(),
-                nowTime = 0,
-                grassSpeed = 0;
+                nowTime = 0;
 
             function draw() {
                 rAFId = w.requestAnimationFrame(draw);
@@ -158,70 +137,115 @@
                 //绘制小鸟
                 ctx.drawImage(shake ? imgObj.bird0 : imgObj.bird1, (W_WIDTH / 2 - 210 / 2) + imgObj.title.width + 10, shakeY + 4, imgObj.bird0.width, imgObj.bird0.height);
                 //绘制草坪
-                console.log(imgObj.grass.height)
-                ctx.drawImage(imgObj.grass, 10 * grassSpeed, 1176 * W_HEIGHT / 1334, W_WIDTH, W_WIDTH * imgObj.grass.height / imgObj.grass.width);
-                ctx.drawImage(imgObj.grass, W_WIDTH + 10 * grassSpeed, 1176 * W_HEIGHT / 1334, W_WIDTH, W_WIDTH * imgObj.grass.height / imgObj.grass.width);
-                if (W_WIDTH + 10 * grassSpeed >= 10) {
-                    grassSpeed -= 0.05;
+                ctx.drawImage(imgObj.grass, grassSpeed, 1176 * W_HEIGHT / 1334, W_WIDTH, W_WIDTH * imgObj.grass.height / imgObj.grass.width);
+                ctx.drawImage(imgObj.grass, W_WIDTH + grassSpeed, 1176 * W_HEIGHT / 1334, W_WIDTH, W_WIDTH * imgObj.grass.height / imgObj.grass.width);
+                if (W_WIDTH + grassSpeed > 10) {
+                    grassSpeed -= 2;
                 } else {
                     grassSpeed = 0;
                 }
             }
             return draw;
         }
-        //开始游戏按钮
+        //首次开始游戏按钮
         cvs.addEventListener('touchstart', startGame, false);
 
         function startGame(e) {
             var X = e.touches[0].pageX,
                 Y = e.touches[0].pageY;
             if ((X >= (W_WIDTH / 2 - imgObj.start.width / 2) && X <= ((W_WIDTH / 2 - imgObj.start.width / 2) + imgObj.start.width)) && (Y >= (W_HEIGHT / 2 - imgObj.start.height / 2) && Y <= (W_HEIGHT / 2 - imgObj.start.height / 2) + imgObj.start.height)) {
-                cvs.addEventListener('touchstart', startGame, false);
                 startScene = null;
                 w.cancelAnimationFrame(rAFId);
                 clean();
-                
+                cvs.removeEventListener('touchstart', startGame, false);
+                cvs.addEventListener('touchstart', fly, false);
+                init();
+                loop();
             }
-        }*/
-        
+        }
+        //游戏主体
+        function loop() {
+            var nowTime = Date.now();
+            detailTime = nowTime - lastTime;
+            lastTime = nowTime;
+            check();
+            if (bird.alive) {
+                ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
+                //绘制背景
+                ctx.drawImage(imgObj.bg, 0, 0, W_WIDTH, W_HEIGHT);
+                move += 2;
+                //绘制水管
+                if (pipes.length <= 0) {
+                    creatPipe();
+                }
+                if (move > 182) {
+                    move = 0;
+                    creatPipe();
+                }
+                //画水管
+                for (var i = 0, len = pipes.length; i < len; i++) {
+                    pipes[i].draw();
+                }
+                //绘制草坪
+                ctx.drawImage(imgObj.grass, grassSpeed, 1176 * W_HEIGHT / 1334, W_WIDTH, W_WIDTH * imgObj.grass.height / imgObj.grass.width);
+                ctx.drawImage(imgObj.grass, W_WIDTH + grassSpeed, 1176 * W_HEIGHT / 1334, W_WIDTH, W_WIDTH * imgObj.grass.height / imgObj.grass.width);
+                if (W_WIDTH + grassSpeed > 10) {
+                    grassSpeed -= 2;
+                } else {
+                    grassSpeed = 0;
+                }
+                score.draw();
+                bird.draw();
+                rAFId = w.requestAnimationFrame(loop);
+            } else {
+                showScore();
+                destroy();
+                restart();
+            }
+        }
+        //小鸟向上飞
+
+        function fly() {
+            bird.speed = -6;
+        }
         //碰撞检测
-        function check(){
+        function check() {
             var birdRect = {
-                top: bird.Y ,
+                top: bird.Y,
                 left: bird.X,
                 right: bird.X + imgObj.bird0.width,
                 bottom: bird.Y + imgObj.bird0.height
             };
             //临界条件
             //坠地死亡
-            if(birdRect.bottom >= (1176 * W_HEIGHT / 1334) ){
+            if (birdRect.bottom >= (1176 * W_HEIGHT / 1334) - 10) {
                 bird.alive = false;
             }
             //顶端不能越界
-            if(birdRect.top <= 0){
+            if (birdRect.top <= 0) {
                 bird.speed = 3;
             }
             //水管检测
-            for(var i = 0, len = pipes.length; i < len; i++){
+            for (var i = 0, len = pipes.length; i < len; i++) {
                 var pipe = pipes[i];
                 var pipeRect = {
                     top: pipe.upipeY + imgObj.upipe.height, //上水管宽口距离顶部距离
                     left: pipe.pipeX,
                     right: pipe.pipeX + imgObj.upipe.width,
-                    bottom: pipe.dpipeY//下水管宽口距离顶部距离
+                    bottom: pipe.dpipeY //下水管宽口距离顶部距离
                 };
-                if(birdRect.right >= pipeRect.left && birdRect.left <= pipeRect.right){
-                    if(birdRect.top <= pipeRect.top || birdRect.bottom >= pipeRect.bottom){
+                if (birdRect.right >= pipeRect.left && birdRect.left <= pipeRect.right) {
+                    if (birdRect.top <= pipeRect.top || birdRect.bottom >= pipeRect.bottom) {
                         bird.alive = false;
                     }
                 }
                 //计数
-                if(birdRect.left >= pipeRect.right && !pipe.skip){
+                if (birdRect.left >= pipeRect.right && !pipe.skip) {
                     pipe.skip = true;
                     score.count++;
                 }
                 //小鸟轮廓辅助线
-                ctx.beginPath();
+                /*ctx.beginPath();
                 ctx.moveTo(birdRect.right, 0);
                 ctx.lineTo(birdRect.right, W_HEIGHT);
                 ctx.strokeStyle = 'red';
@@ -240,18 +264,12 @@
                 ctx.moveTo(0, birdRect.bottom);
                 ctx.lineTo(W_WIDTH, birdRect.bottom);
                 ctx.strokeStyle = 'green';
-                ctx.stroke();
+                ctx.stroke();*/
 
             }
         }
-        //bg
-        function bg(){
-            ctx.rect(0, 0, W_WIDTH, W_HEIGHT);
-            ctx.fillStyle = '#6fc6cd';
-            ctx.fill();
-        }
         //小鸟
-        function Bird(){
+        function Bird() {
             var _this = this;
             _this.X = W_WIDTH / 2 - imgObj.bird0.width / 2;
             _this.Y = W_HEIGHT / 2 - imgObj.bird0.height / 2;
@@ -262,65 +280,65 @@
         }
         Bird.prototype = {
             constructor: Bird,
-            draw: function(){
+            draw: function() {
                 ctx.save();
                 var _this = this;
                 var index = _this.wing ? 0 : 1;
                 _this.Y += _this.speed;
                 _this.speed = _this.speed + 0.02 * detailTime;
-                if(bird.speed >= 10){
+                if (bird.speed >= 10) {
                     bird.speed = 10;
                 }
                 //小鸟的头部方向
                 //设置中心点
                 ctx.translate(_this.X + (imgObj.bird0.width / 2), _this.Y + (imgObj.bird0.height / 2));
-                if(_this.speed > 0){
+                if (_this.speed > 0) {
                     //旋转30deg
                     ctx.rotate(30 * Math.PI / 180);
-                }else if(_this.speed < 0){
+                } else if (_this.speed < 0) {
                     ctx.rotate(-30 * Math.PI / 180);
-                }else{
+                } else {
                     ctx.rotate(0);
                 }
                 ctx.translate(-_this.X - (imgObj.bird0.width / 2), -_this.Y - (imgObj.bird0.height / 2));
                 //挥动翅膀
-                ctx.drawImage(imgObj['bird'+ index], _this.X, _this.Y);
+                ctx.drawImage(imgObj['bird' + index], _this.X, _this.Y);
                 ctx.restore();
             }
         }
         //管道
-        function Pipe(){
+        function Pipe() {
             var _this = this;
             _this.viewH = 1176 * W_HEIGHT / 1334; //管道出现的高度区域
             _this.distance = 124; //上下管道距离
             _this.pipeX = W_WIDTH;
-            _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 120));//上管道Y
-            _this.dpipeY = _this.upipeY + _this.distance + 60;//下管道Y
+            _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 150)); //上管道Y
+            _this.dpipeY = _this.upipeY + _this.distance + 60; //下管道Y
             _this.alive = true;
-            _this.skip = false;//是否被越过
+            _this.skip = false; //是否被越过
         }
         Pipe.prototype = {
             constructor: Pipe,
-            draw: function(){
+            draw: function() {
                 var _this = this;
-                if(_this.alive){
+                if (_this.alive) {
                     //上水管
                     ctx.drawImage(imgObj.upipe, _this.pipeX, _this.upipeY);
                     //上水管管体
-                    (function(){
-                        for(var i = 0, len = _this.upipeY / 3; i < len; i++){
+                    (function() {
+                        for (var i = 0, len = _this.upipeY / 3; i < len; i++) {
                             ctx.drawImage(imgObj.umod, _this.pipeX, i * 3);
                         }
                     })();
                     //下水管
                     ctx.drawImage(imgObj.dpipe, _this.pipeX, _this.dpipeY);
                     //下水管管体
-                    (function(){
-                        for(var i = 0, len = (_this.viewH - (_this.dpipeY + 60)) / 2; i < len; i++){
+                    (function() {
+                        for (var i = 0, len = (_this.viewH - (_this.dpipeY + 60)) / 2; i < len; i++) {
                             ctx.drawImage(imgObj.dmod, _this.pipeX, _this.dpipeY + 60 + i * 2);
                         }
                     })();
-                    if(_this.pipeX <= -62){
+                    if (_this.pipeX <= -62) {
                         _this.alive = false;
                     }
                     _this.pipeX -= 2;
@@ -329,19 +347,19 @@
             },
         }
         //创建管道
-        function creatPipe(){
+        function creatPipe() {
             var pipe = new Pipe();
-            if(pipes.length >= 4){
+            if (pipes.length >= 4) {
                 pipes.shift();
             }
             pipes.push(pipe);
         }
         //分数系统
-        function Score(){
+        function Score() {
             this.count = 0;
             this.ready = false;
         }
-        Score.prototype.draw = function(){
+        Score.prototype.draw = function() {
             //绘制分数
             ctx.save();
             ctx.font = 'bold 40px Arial';
@@ -354,23 +372,23 @@
             ctx.restore();
         }
         //销毁
-        function destroy(){
+        function destroy() {
             bird = null;
             score = null;
+            storage = null;
             pipes = [];
             w.cancelAnimationFrame(rAFId);
             cvs.removeEventListener('touchstart', fly, false);
             //clean();
         }
         //重新开始
-        function restart(){
-            ctx.drawImage(imgObj.start, (W_WIDTH / 2 - imgObj.start.width / 2), (W_HEIGHT / 2 - imgObj.start.height / 2), imgObj.start.width, imgObj.start.height);
+        function restart() {
             cvs.addEventListener('touchstart', restartGame, false);
 
             function restartGame(e) {
                 var X = e.touches[0].pageX,
                     Y = e.touches[0].pageY;
-                if ((X >= (W_WIDTH / 2 - imgObj.start.width / 2) && X <= ((W_WIDTH / 2 - imgObj.start.width / 2) + imgObj.start.width)) && (Y >= (W_HEIGHT / 2 - imgObj.start.height / 2) && Y <= (W_HEIGHT / 2 - imgObj.start.height / 2) + imgObj.start.height)) {
+                if ((X >= (W_WIDTH / 2 - imgObj.start.width / 2) && X <= ((W_WIDTH / 2 - imgObj.start.width / 2) + imgObj.start.width)) && (Y >= (W_HEIGHT / 4 + imgObj.msg.height + 50) && Y <= (W_HEIGHT / 4 + imgObj.msg.height + 50) + imgObj.start.height)) {
                     cvs.removeEventListener('touchstart', restartGame, false);
                     cvs.addEventListener('touchstart', fly, false);
                     init();
@@ -378,9 +396,46 @@
                 }
             }
         }
+
+        function showScore() {
+            ctx.save();
+            ctx.drawImage(imgObj.start, (W_WIDTH / 2 - imgObj.start.width / 2), W_HEIGHT / 4 + imgObj.msg.height + 50, imgObj.start.width, imgObj.start.height);
+            ctx.drawImage(imgObj.msg, (W_WIDTH / 2 - imgObj.msg.width / 2), W_HEIGHT / 4, imgObj.msg.width, imgObj.msg.height);
+            ctx.font = 'bold 20px Arial';
+            ctx.textBaseline = 'top';
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#e9b427';
+            ctx.fillText('SCROE', (W_WIDTH / 2 - imgObj.msg.width / 2 + 44), W_HEIGHT / 3 + 20);
+            ctx.fillText('BEST', (W_WIDTH / 2 - imgObj.msg.width / 2) + 170, W_HEIGHT / 3 + 20);
+            ctx.font = 'bold 40px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#e47700';
+            if (parseInt(storage.get('fbs'), 10) < score.count) {
+                storage.set('fbs', score.count);
+            }
+            ctx.fillText(score.count, (W_WIDTH / 2 - imgObj.msg.width / 2 + 80), W_HEIGHT / 3 + 36);
+            ctx.fillText(bestScore, (W_WIDTH / 2 - imgObj.msg.width / 2) + 196, W_HEIGHT / 3 + 36);
+            ctx.restore();
+        }
         //清除画布
         function clean() {
             ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
+        }
+        //localStorage
+        function Storage(type) {
+            this.type = w[type];
+        }
+        Storage.prototype = {
+            constructor: Storage,
+            get: function(key) {
+                return this.type.getItem(key);
+            },
+            set: function(key, value) {
+                this.type.setItem(key, value);
+            },
+            clean: function(key) {
+                this.type.removeItem(key);
+            }
         }
     }
 }(window, document);
