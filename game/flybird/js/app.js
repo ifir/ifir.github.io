@@ -51,6 +51,7 @@
         cvs.width = W_WIDTH;
         cvs.height = W_HEIGHT;
         var bird = null; //小鸟
+        var score = null;//分数
         var pipes = []; //管道
         var lastTime = 0;
         var detailTime = 0;
@@ -72,6 +73,7 @@
         //初始化
         function init(){
             bird = new Bird();
+            score = new Score();
             pipes = [];
             move = 0;
             lastTime = Date.now();
@@ -101,10 +103,10 @@
             var nowTime = Date.now();
             detailTime = nowTime - lastTime;
             lastTime = nowTime;
+            check();
             if(bird.alive){
-                move += 2;
                 ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
-                check();
+                move += 2;
                 //绘制水管
                 if(pipes.length <= 0){
                     creatPipe();
@@ -117,16 +119,15 @@
                 for(var i = 0, len = pipes.length; i < len; i++){
                     pipes[i].draw();
                 }
+                score.draw();
                 bird.draw();
                 rAFId = w.requestAnimationFrame(loop);
             }else{
-                check();
                 destroy();
                 restart();
-                
             }
         }
-        
+        //小鸟向上飞
         cvs.addEventListener('touchstart', fly, false);
         function fly(){
             bird.speed = -6;
@@ -214,6 +215,11 @@
                         bird.alive = false;
                     }
                 }
+                //计数
+                if(birdRect.left >= pipeRect.right && !pipe.skip){
+                    pipe.skip = true;
+                    score.count++;
+                }
                 //小鸟轮廓辅助线
                 ctx.beginPath();
                 ctx.moveTo(birdRect.right, 0);
@@ -291,6 +297,7 @@
             _this.upipeY = Math.floor(Math.random() * (_this.viewH - _this.distance - 120));//上管道Y
             _this.dpipeY = _this.upipeY + _this.distance + 60;//下管道Y
             _this.alive = true;
+            _this.skip = false;//是否被越过
         }
         Pipe.prototype = {
             constructor: Pipe,
@@ -321,6 +328,7 @@
 
             },
         }
+        //创建管道
         function creatPipe(){
             var pipe = new Pipe();
             if(pipes.length >= 4){
@@ -328,9 +336,27 @@
             }
             pipes.push(pipe);
         }
+        //分数系统
+        function Score(){
+            this.count = 0;
+            this.ready = false;
+        }
+        Score.prototype.draw = function(){
+            //绘制分数
+            ctx.save();
+            ctx.font = 'bold 40px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#fff';
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 10;
+            ctx.strokeText(this.count, W_WIDTH / 2, 50);
+            ctx.fillText(this.count, W_WIDTH / 2, 50);
+            ctx.restore();
+        }
         //销毁
         function destroy(){
             bird = null;
+            score = null;
             pipes = [];
             w.cancelAnimationFrame(rAFId);
             cvs.removeEventListener('touchstart', fly, false);
