@@ -283,7 +283,16 @@
             draw: function() {
                 ctx.save();
                 var _this = this;
+                if(this.count === 8){
+                    this.wing = 1;
+                }
+                if(this.count === 16){
+                    this.wing = 0;
+                    this.count = 0;
+                }
                 var index = _this.wing ? 0 : 1;
+                this.count++;
+                console.log(index)
                 _this.Y += _this.speed;
                 _this.speed = _this.speed + 0.02 * detailTime;
                 if (bird.speed >= 10) {
