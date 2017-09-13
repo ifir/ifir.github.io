@@ -413,16 +413,16 @@
             ctx.textBaseline = 'top';
             ctx.textAlign = 'left';
             ctx.fillStyle = '#e9b427';
-            ctx.fillText('SCROE', (W_WIDTH / 2 - imgObj.msg.width / 2 + 44), W_HEIGHT / 3 + 20);
-            ctx.fillText('BEST', (W_WIDTH / 2 - imgObj.msg.width / 2) + 170, W_HEIGHT / 3 + 20);
+            ctx.fillText('SCROE', (W_WIDTH / 2 - imgObj.msg.width / 2) + 44, W_HEIGHT / 4 + 64);
+            ctx.fillText('BEST', (W_WIDTH / 2 - imgObj.msg.width / 2) + 170, W_HEIGHT / 4 + 64);
             ctx.font = 'bold 40px Arial';
             ctx.textAlign = 'center';
             ctx.fillStyle = '#e47700';
             if (parseInt(storage.get('fbs'), 10) < score.count) {
                 storage.set('fbs', score.count);
             }
-            ctx.fillText(score.count, (W_WIDTH / 2 - imgObj.msg.width / 2 + 80), W_HEIGHT / 3 + 36);
-            ctx.fillText(bestScore, (W_WIDTH / 2 - imgObj.msg.width / 2) + 196, W_HEIGHT / 3 + 36);
+            ctx.fillText(score.count, (W_WIDTH / 2 - imgObj.msg.width / 2) + 80, W_HEIGHT / 4 + 84);
+            ctx.fillText(bestScore, (W_WIDTH / 2 - imgObj.msg.width / 2) + 196, W_HEIGHT / 4 + 84);
             ctx.restore();
         }
         //清除画布
