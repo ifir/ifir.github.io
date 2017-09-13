@@ -292,7 +292,6 @@
                 }
                 var index = _this.wing ? 0 : 1;
                 this.count++;
-                console.log(index)
                 _this.Y += _this.speed;
                 _this.speed = _this.speed + 0.02 * detailTime;
                 if (bird.speed >= 10) {
