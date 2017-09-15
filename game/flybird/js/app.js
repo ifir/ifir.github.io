@@ -39,7 +39,8 @@
         //得到兼容各浏览器的API
         w.requestAnimationFrame = requestAnimationFrame;
         w.cancelAnimationFrame = cancelAnimationFrame;
-    })()
+    })();
+    //load
     w.addEventListener('load', load, false);
 
     function load() {
@@ -283,6 +284,7 @@
             draw: function() {
                 ctx.save();
                 var _this = this;
+                //挥动翅膀频率
                 if(this.count === 8){
                     this.wing = 1;
                 }
@@ -309,7 +311,6 @@
                     ctx.rotate(0);
                 }
                 ctx.translate(-_this.X - (imgObj.bird0.width / 2), -_this.Y - (imgObj.bird0.height / 2));
-                //挥动翅膀
                 ctx.drawImage(imgObj['bird' + index], _this.X, _this.Y);
                 ctx.restore();
             }
@@ -387,7 +388,6 @@
             pipes = [];
             w.cancelAnimationFrame(rAFId);
             cvs.removeEventListener('touchstart', fly, false);
-            //clean();
         }
         //重新开始
         function restart() {
@@ -404,7 +404,7 @@
                 }
             }
         }
-
+        //分数板
         function showScore() {
             ctx.save();
             ctx.drawImage(imgObj.start, (W_WIDTH / 2 - imgObj.start.width / 2), W_HEIGHT / 4 + imgObj.msg.height + 50, imgObj.start.width, imgObj.start.height);
