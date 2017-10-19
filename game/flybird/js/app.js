@@ -20,14 +20,15 @@
 
         //如果当前浏览器不支持requestAnimationFrame和cancelAnimationFrame，则会退到setTimeout
         if (!requestAnimationFrame || !cancelAnimationFrame) {
-            requestAnimationFrame = function(callback, element) {
+            requestAnimationFrame = function(callback) {
                 var currTime = new Date().getTime();
                 //为了使setTimteout的尽可能的接近每秒60帧的效果
                 var timeToCall = Math.max(0, 16 - (currTime - lastTime));
                 var id = w.setTimeout(function() {
-                    callback(currTime + timeToCall);
+                    callback();
                 }, timeToCall);
                 lastTime = currTime + timeToCall;
+                console.log(timeToCall)
                 return id;
             };
 
@@ -40,6 +41,26 @@
         w.requestAnimationFrame = requestAnimationFrame;
         w.cancelAnimationFrame = cancelAnimationFrame;
     })();
+    //test
+    /*(function(){
+        var lastTime = 0;
+        var requestAnimationFrame = function(callback) {
+                var currTime = new Date().getTime();
+                //为了使setTimteout的尽可能的接近每秒60帧的效果
+                var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                var id = w.setTimeout(function() {
+                    callback();
+                }, timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+
+        var cancelAnimationFrame = function(id) {
+                w.clearTimeout(id);
+            };
+        w.requestAnimationFrame = requestAnimationFrame;
+        w.cancelAnimationFrame = cancelAnimationFrame;
+    })();*/
     //load
     w.addEventListener('load', load, false);
 
@@ -77,6 +98,7 @@
             imgObj = {};
         //初始化
         function init() {
+
             bird = new Bird();
             score = new Score();
             storage = new Storage('localStorage')
@@ -107,6 +129,12 @@
 
                             var s = startScene();
                             s();
+                            //url加上fps开启FPS显示
+                            var hash = w.location.href;
+                            if(/fps/ig.test(hash)){
+                                var fps = FPS();
+                                fps();
+                            }
                         }
                     }, false);
                 })(key);
@@ -170,6 +198,7 @@
             detailTime = nowTime - lastTime;
             lastTime = nowTime;
             check();
+
             if (bird.alive) {
                 ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
                 //绘制背景
@@ -217,6 +246,7 @@
                 right: bird.X + imgObj.bird0.width,
                 bottom: bird.Y + imgObj.bird0.height
             };
+            
             //临界条件
             //坠地死亡
             if (birdRect.bottom >= (1176 * W_HEIGHT / 1334) - 10) {
@@ -245,29 +275,31 @@
                     pipe.skip = true;
                     score.count++;
                 }
-                //小鸟轮廓辅助线
-                /*ctx.beginPath();
-                ctx.moveTo(birdRect.right, 0);
-                ctx.lineTo(birdRect.right, W_HEIGHT);
-                ctx.strokeStyle = 'red';
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(birdRect.left, 0);
-                ctx.lineTo(birdRect.left, W_HEIGHT);
-                ctx.strokeStyle = 'blue';
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(0, birdRect.top);
-                ctx.lineTo(W_WIDTH, birdRect.top);
-                ctx.strokeStyle = 'black';
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(0, birdRect.bottom);
-                ctx.lineTo(W_WIDTH, birdRect.bottom);
-                ctx.strokeStyle = 'green';
-                ctx.stroke();*/
+
 
             }
+            //小鸟轮廓辅助线
+            /*ctx.beginPath();
+            ctx.moveTo(birdRect.right, 0);
+            ctx.lineTo(birdRect.right, W_HEIGHT);
+            ctx.strokeStyle = 'red';
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(birdRect.left, 0);
+            ctx.lineTo(birdRect.left, W_HEIGHT);
+            ctx.strokeStyle = 'blue';
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(0, birdRect.top);
+            ctx.lineTo(W_WIDTH, birdRect.top);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(0, birdRect.bottom);
+            ctx.lineTo(W_WIDTH, birdRect.bottom);
+            ctx.strokeStyle = 'green';
+            ctx.stroke();*/
+
         }
         //小鸟
         function Bird() {
@@ -313,6 +345,9 @@
                 ctx.translate(-_this.X - (imgObj.bird0.width / 2), -_this.Y - (imgObj.bird0.height / 2));
                 ctx.drawImage(imgObj['bird' + index], _this.X, _this.Y);
                 ctx.restore();
+
+                
+
             }
         }
         //管道
@@ -429,7 +464,7 @@
         function clean() {
             ctx.clearRect(0, 0, W_WIDTH, W_HEIGHT);
         }
-        //localStorage
+        //Storage
         function Storage(type) {
             this.type = w[type];
         }
@@ -445,5 +480,25 @@
                 this.type.removeItem(key);
             }
         }
+
+        //FPS
+        function FPS(){
+            var ele = d.createElement('div');
+            ele.className = 'fps';
+            d.querySelector('body').appendChild(ele);
+            var fps = 0;
+            var last = Date.now();
+            return function count(){
+                var pass = Date.now() - last;
+                fps++;
+                if(pass >= 1000){
+                    last += pass;
+                    d.querySelector('.fps').innerHTML = 'fps:' + fps;
+                    fps = 0;
+                }
+                w.requestAnimationFrame(count);
+            }
+        }
+
     }
 }(window, document);
