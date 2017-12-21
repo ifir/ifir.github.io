@@ -15,7 +15,7 @@
             }
             prefix = prefixes[i];
             requestAnimationFrame = requestAnimationFrame || w[prefix + 'RequestAnimationFrame'];
-            cancelAnimationFrame = cancelAnimationFrame || w[prefix + 'CancelAnimationFrame'] || window[prefix + 'CancelRequestAnimationFrame'];
+            cancelAnimationFrame = cancelAnimationFrame || w[prefix + 'CancelAnimationFrame'] || w[prefix + 'CancelRequestAnimationFrame'];
         }
 
         //如果当前浏览器不支持requestAnimationFrame和cancelAnimationFrame，则会退到setTimeout
