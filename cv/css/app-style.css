@@ -583,7 +583,7 @@ ul
 }
 .show-link li
 {
-    margin: 10px 0;
+    margin: 10px auto;
 
             -webkit-transition: all 1.2s ease .6s;
 
@@ -592,6 +592,8 @@ ul
             transform: translateX(120%);
 
     opacity: 0;
+    width: 90%;
+    overflow: hidden;
 }
 .show-link a
 {
@@ -612,13 +614,13 @@ ul
 
     background: url('../img/Label.png') no-repeat center center;
     background-size: 30px 30px;
+    float: left;
 }
 .link-text
 {
-    display: inline-block;
-
+    display: block;
+    margin-left: 40px;
     text-align: left;
-    vertical-align: middle;
 }
 .link-text p
 {
@@ -626,9 +628,13 @@ ul
 
     margin: 0;
 
-    text-decoration: underline;
+    text-decoration: none;
 
     color: #7b6257;
+}
+.link-text p:first-child{
+    font-size: 14px;
+    color: #6f4c3d;
 }
 .active .show-link li:nth-child(1)
 {
@@ -638,6 +644,7 @@ ul
             transform: translateX(0);
 
     opacity: 1;
+
 }
 .active .show-link li:nth-child(2)
 {
