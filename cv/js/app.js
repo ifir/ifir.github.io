@@ -17,8 +17,8 @@ function load() {
 		startTime = 0, endTime = 0;
 	//雷达图数据
 	var radarData = [
-		['Gulp/Webpack', 0.75],
-		['React/Vue', 0.7],
+		['Webpack', 0.8],
+		['React/Vue', 0.85],
 		['HTML5', 0.8],
 		['CSS3', 0.9],
 		['JS', 0.85],
