@@ -19,6 +19,7 @@ body
     max-height: 100%;
     margin: 0 auto;
     padding: 0;
+    background: #ececec;
 
     -webkit-overflow-scrolling: touch;
             overflow-scrolling: touch;
@@ -335,6 +336,7 @@ ul
 .section-pagefour,
 .section-pagefive,
 .section-pagesix
+.section-pageseven
 {
     position: relative;
 
